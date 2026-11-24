@@ -1,0 +1,148 @@
+/* ==========================================================================
+   Design tokens (Tailwind v4 @theme)
+   Every variable here generates utilities, e.g.
+   --color-accent    -> bg-accent / text-accent / border-accent
+   --text-h2         -> text-h2 (size + line-height + tracking)
+   --spacing-section -> py-section / gap-section
+   --container-page  -> max-w-page
+   ========================================================================== */
+
+/* Palette + semantic colors. `static` makes sure every variable is emitted,
+   so the semantic layer can be re-pointed at runtime (see `theme-dark`). */
+@theme static {
+  /* Start from an empty palette so only on-brand colors exist. */
+  --color-*: initial;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Ink: warm near-blacks for text and solid fills */
+  --color-ink-950: #0f0d0a;
+  --color-ink-900: #1c1a17;
+  --color-ink-800: #2b2824;
+  --color-ink-700: #3d3a35;
+
+  /* Stone: warm neutrals for muted text, hairlines and quiet surfaces */
+  --color-stone-500: #6f6a63;
+  --color-stone-400: #9c968c;
+  --color-stone-300: #cfc8bc;
+  --color-stone-200: #e4dfd6;
+  --color-stone-100: #f1eee8;
+  --color-stone-50: #f8f6f2;
+
+  /* Espresso: deep brown-black for dark "prestige" sections */
+  --color-espresso-900: #17120c;
+  --color-espresso-800: #221a12;
+  --color-espresso-700: #3a332a;
+
+  /* Brass: the single warm metallic accent */
+  --color-brass-700: #8a6820; /* accent as small text on light surfaces (AA) */
+  --color-brass-600: #a9802a;
+  --color-brass-500: #d4a23a; /* primary fill */
+  --color-brass-400: #e2bc66; /* accent as text on dark surfaces */
+  --color-brass-300: #c7ae80; /* muted brass for subtle details */
+
+  /* Sand: soft warm tints for highlight bands */
+  --color-sand-200: #e7dfcf;
+  --color-sand-100: #f2ece1;
+
+  /* Semantic layer: use these in components, not the raw palette. */
+  --color-surface: var(--color-white);
+  --color-surface-alt: var(--color-stone-50);
+  --color-surface-raised: var(--color-white);
+  --color-fg: var(--color-ink-900);
+  --color-fg-muted: var(--color-stone-500);
+  --color-fg-subtle: var(--color-stone-400);
+  --color-line: var(--color-stone-200);
+  --color-line-strong: var(--color-stone-300);
+  --color-accent: var(--color-brass-500);
+  --color-accent-fg: var(--color-ink-900);
+  --color-accent-ink: var(--color-brass-700);
+}
+
+@theme {
+  /* ---------- Typography ---------- */
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+
+  /* Fluid display scale: light serif, tight tracking */
+  --text-display: clamp(2.75rem, 1.6rem + 5vw, 5rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.02em;
+
+  --text-h1: clamp(2.25rem, 1.5rem + 3.4vw, 4rem);
+  --text-h1--line-height: 1.05;
+  --text-h1--letter-spacing: -0.02em;
+
+  --text-h2: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.02em;
+
+  --text-h3: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  --text-h3--line-height: 1.15;
+  --text-h3--letter-spacing: -0.015em;
+
+  --text-h4: 1.25rem;
+  --text-h4--line-height: 1.35;
+  --text-h4--letter-spacing: -0.01em;
+
+  /* Reading text */
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  --text-lead--line-height: 1.6;
+
+  --text-body: clamp(1rem, 0.96rem + 0.15vw, 1.0625rem);
+  --text-body--line-height: 1.75;
+
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.6;
+
+  /* Uppercase, widely tracked micro-type for labels, buttons, nav */
+  --text-label: 0.75rem;
+  --text-label--line-height: 1;
+  --text-label--letter-spacing: 0.2em;
+
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.22em;
+
+  /* Big numerals for stats / prices / process steps */
+  --text-stat: clamp(2.5rem, 1.9rem + 2.5vw, 3.75rem);
+  --text-stat--line-height: 1;
+  --text-stat--letter-spacing: -0.03em;
+
+  --tracking-display: -0.02em;
+  --tracking-label: 0.2em;
+  --tracking-eyebrow: 0.22em;
+  --tracking-spaced: 0.4em;
+
+  /* ---------- Spacing ---------- */
+  /* Default 4px scale is kept (p-4, gap-6...). These are layout tokens. */
+  --spacing-gutter: clamp(1rem, 0.5rem + 2.5vw, 2rem); /* 16 -> 32px side padding */
+  --spacing-section: clamp(4rem, 2.6rem + 5.5vw, 6.5rem); /* 64 -> 104px */
+  --spacing-section-sm: clamp(2.5rem, 1.8rem + 3vw, 4rem); /* 40 -> 64px */
+  --spacing-header: 5rem;
+
+  /* ---------- Containers (max-w-*) ---------- */
+  --container-page: 82.5rem; /* 1320px content width */
+  --container-narrow: 48rem; /* 768px: intros, forms */
+  --container-prose: 40rem; /* 640px: long-form reading */
+
+  /* ---------- Breakpoints ---------- */
+  /* sm 40rem, md 48rem, lg 64rem stay default. Desktop starts at 1200px. */
+  --breakpoint-xl: 75rem;
+  --breakpoint-2xl: 90rem;
+
+  /* ---------- Shape ---------- */
+  --radius-card: 0.625rem; /* cards + imagery. Buttons stay square. */
+
+  --shadow-lift: 0 1.5rem 3rem -1.5rem rgb(15 13 10 / 0.35);
+
+  /* ---------- Media ---------- */
+  --aspect-property: 10 / 7;
+  --aspect-portrait: 4 / 5;
+  --aspect-wide: 21 / 9;
+
+  /* ---------- Motion ---------- */
+  --ease-luxe: cubic-bezier(0.645, 0.045, 0.355, 1); /* UI state changes */
+  --ease-reveal: cubic-bezier(0.2, 0.7, 0.2, 1); /* slow image zooms, reveals */
+}

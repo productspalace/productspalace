@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* Global design system */
+@import "./styles/theme.css";
+@import "./styles/base.css";
+@import "./styles/utilities.css";
