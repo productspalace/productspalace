@@ -408,3 +408,128 @@
     rgb(15 13 10 / 0) 75%
   );
 }
+
+/* ==========================================================================
+   Homepage primitives (added with the homepage build, see docs/design-system.md)
+   ========================================================================== */
+
+/* Wide-tracked accent kicker. Pair with kicker-rule for the trailing hairline. */
+@utility kicker {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: var(--tracking-spaced);
+  text-transform: uppercase;
+  color: var(--color-accent-ink);
+}
+
+@utility kicker-rule {
+  &::after {
+    content: "";
+    flex: 1 1 auto;
+    min-width: 3rem;
+    height: 1px;
+    background-color: var(--color-line);
+  }
+}
+
+/* Dark fill with an accent hairline. On hover the fill turns accent and wipes
+   away to the right, leaving an outline (reference: brush-mask button). */
+@utility btn-ink {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 3.375rem;
+  padding-inline: 1.5rem;
+  border-color: var(--color-accent);
+  color: var(--color-white);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--color-ink-900);
+    clip-path: inset(0 0 0 0);
+    transition:
+      clip-path 700ms var(--ease-luxe),
+      background-color 150ms linear;
+  }
+
+  &:hover {
+    color: var(--color-fg);
+  }
+
+  &:hover::before {
+    background-color: var(--color-accent);
+    clip-path: inset(0 0 0 100%);
+  }
+}
+
+/* Uppercase text link with a thick accent underline and a nudging arrow. */
+@utility link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 0.6875rem;
+  border-bottom: 2px solid var(--color-accent);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  & svg {
+    transition: transform 300ms ease;
+  }
+
+  &:hover svg {
+    transform: translateX(5px);
+  }
+}
+
+/* Round icon button used by every carousel. */
+@utility btn-round {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--color-accent);
+  border-radius: 9999px;
+  color: var(--color-fg);
+  cursor: pointer;
+  transition:
+    background-color 300ms var(--ease-luxe),
+    border-color 300ms var(--ease-luxe),
+    opacity 300ms var(--ease-luxe);
+
+  &:hover {
+    background-color: var(--color-accent);
+    color: var(--color-accent-fg);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+    background-color: transparent;
+  }
+}
+
+/* Outlined display type (footer marquee). */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--outline-color, var(--color-brass-600));
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
