@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { mainNav } from '../../content/home'
+import { mobileNav } from '../../content/site'
+import { ariaCurrent } from '../../lib/page'
 import { setScrollLocked } from '../../lib/smooth-scroll'
 import { Icon } from '../ui/Icon'
 import { Logo } from '../ui/Logo'
@@ -52,10 +53,11 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
         <Logo className="text-[0.8125rem]" />
         <nav aria-label="Mobile" className="mt-10">
           <ul>
-            {mainNav.map((item) => (
+            {mobileNav.map((item) => (
               <li key={item.href} className="border-b border-line">
                 <a
                   href={item.href}
+                  aria-current={ariaCurrent(item.page)}
                   onClick={onClose}
                   className="block py-3.5 text-sm font-medium text-fg transition-colors hover:text-accent-ink aria-[current=page]:text-accent-ink"
                 >

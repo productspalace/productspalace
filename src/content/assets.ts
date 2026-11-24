@@ -1,5 +1,5 @@
 /**
- * Central asset registry for the homepage.
+ * Central asset registry for every page.
  *
  * Every image, video and logo the homepage renders is referenced from here, so a
  * final asset can be swapped by changing one path. Keep the documented aspect ratio
@@ -88,4 +88,28 @@ export const firstAddressImages: ImageAsset[] = [
   img('address-homes', 'projects/project-05.jpg', 'A modern two-storey home with a front lawn', 1400, 1220),
   img('address-community', 'news/news-03.jpg', 'Homes set among trees', 1048, 676),
   img('address-arrival', 'process/step-04.jpg', 'A home with a driveway and space to park', 640, 900),
+]
+
+/* -------------------------------------------------------------------------- */
+/* About page (see /asset-manifest.md, "About page")                           */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * About page imagery. All TEMP: existing pool-free placeholders, re-used in the
+ * slot whose moment they suit best. None of them show the Products Palace
+ * development; the first-address image carries an "illustrative" caption.
+ */
+export const aboutImages = {
+  hero: img('about-hero', 'expertise/film-poster.jpg', 'A calm, sunlit living room in the late afternoon', 1920, 1080, 'center 60%'),
+  story: img('about-story', 'hero/hero-01.jpg', 'A home lit warmly at dusk, with the lights already on inside', 1920, 1080, '40% center'),
+  belief: img('about-belief', 'about/lifestyle-02.jpg', 'A calm bedroom made up for a good night’s rest', 720, 600),
+  firstAddress: img('about-first-address', 'news/news-03.jpg', 'Low-rise homes with balconies set among trees (illustrative)', 1048, 676),
+}
+
+/** "The lives we design around", one image per household (same order as `theLives.households` in about.ts). */
+export const aboutPeopleImages: ImageAsset[] = [
+  img('about-people-building', 'process/step-02.jpg', 'A woman working calmly at her laptop at a quiet desk', 640, 900, 'center 30%'),
+  img('about-people-newlyweds', 'about/lifestyle-03.jpg', 'A bright kitchen ready for cooking dinner together', 520, 900),
+  img('about-people-family', 'process/step-04.jpg', 'A family house with a lawn and a wide driveway', 640, 900),
+  img('about-people-arrived', 'projects/project-05.jpg', 'A spacious two-storey family home with a front garden', 1400, 1220),
 ]

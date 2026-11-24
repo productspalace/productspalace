@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { CustomCursor } from './components/layout/CustomCursor'
 import { Loader } from './components/layout/Loader'
 import { ScrollTopButton } from './components/layout/ScrollTopButton'
@@ -7,13 +7,17 @@ import { SiteHeader } from './components/layout/SiteHeader'
 import { useAnchorScroll } from './hooks/useAnchorScroll'
 import { useRevealOnScroll } from './hooks/useRevealOnScroll'
 import { startSmoothScroll } from './lib/smooth-scroll'
-import { HomePage } from './pages/HomePage'
 
-const App = () => {
+/**
+ * Shell shared by every page: loader, header, footer and the floating utilities.
+ * Each page is its own HTML document (see vite.config.ts); main.tsx passes in the
+ * page that document renders.
+ */
+const App = ({ children }: { children: ReactNode }) => {
   const [entered, setEntered] = useState(false)
 
   useEffect(() => startSmoothScroll(), [])
-  useAnchorScroll()
+  useAnchorScroll(entered)
   // Entrance animations start as the loader fades, not underneath it.
   useRevealOnScroll(entered)
 
@@ -27,8 +31,8 @@ const App = () => {
       </a>
       <Loader onExit={() => setEntered(true)} />
       <SiteHeader />
-      <main id="main" className="overflow-x-clip">
-        <HomePage />
+      <main id="main" tabIndex={-1} className="overflow-x-clip outline-none">
+        {children}
       </main>
       <SiteFooter />
       <ScrollTopButton />

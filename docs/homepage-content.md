@@ -31,7 +31,7 @@ renders is defined by its content object.
 | `<title>` | Products Palace \| Luxury, for a purpose. |
 | Meta description | Homes planned for peace, privacy and unhurried time with the people you love. Two, three and four-bedroom maisonettes behind one gate. Luxury, for a purpose. |
 | Open Graph | Title as above; description "A home for the life you're working towards. Two, three and four-bedroom maisonettes behind one gate." |
-| Navigation | Our story · Who we build for · Our promise · The homes |
+| Navigation | About (→ `/about/`) · Who we build for · Our promise · The homes. Since the About page was added, *Our story* in the header was replaced by *About*; the homepage's own story section is still at `#about`. Links are built in `src/content/site.ts` |
 | Header CTA | Register interest → `#contact` |
 | Loader | Logo only (no copy), `aria-label` "Loading Products Palace" |
 | Logo descriptor | Real Estate (temporary lock-up; see the asset manifest) |
@@ -159,7 +159,7 @@ The "Price from" and "Property type" fields were removed; no prices exist.
   Field "Your email address", button "Register interest", confirmation "Thank you. We’ll be in
   touch as the details are shared."
 - **Brand line:** A home that gives you back to yourself, and to the people you love.
-- **Columns:** Explore (site anchors + privacy policy) · What you can count on (the five
+- **Columns:** Explore (Home, About us, homepage sections, register interest, privacy policy) · What you can count on (the five
   promises) · Let’s talk about home (contact)
 - **Marquee:** Luxury, for a purpose.
 

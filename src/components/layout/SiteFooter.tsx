@@ -1,5 +1,5 @@
 import { useRef, useState, type CSSProperties, type FormEvent } from 'react'
-import { anchors, contact, footer, socials } from '../../content/home'
+import { anchors, contact, footer, socials } from '../../content/site'
 import { gsap, MOTION_OK, useGSAP } from '../../lib/gsap'
 import { Icon } from '../ui/Icon'
 import { Logo } from '../ui/Logo'

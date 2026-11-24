@@ -1,5 +1,6 @@
 import { useRef } from 'react'
-import { anchors, moment } from '../../content/home'
+import { moment } from '../../content/home'
+import { anchors } from '../../content/site'
 import { useSnapTrack } from '../../hooks/useSnapTrack'
 import { gsap, MOTION_OK, useGSAP } from '../../lib/gsap'
 import { CarouselNav } from '../ui/CarouselNav'

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react'
-import { anchors, people } from '../../content/home'
+import { people } from '../../content/home'
+import { anchors } from '../../content/site'
 import { prefersReducedMotion } from '../../lib/gsap'
 import { AssetImage } from '../ui/AssetImage'
 import { Icon } from '../ui/Icon'

@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { expertiseFilm } from '../../content/assets'
-import { anchors, belief } from '../../content/home'
+import { belief } from '../../content/home'
+import { anchors } from '../../content/site'
 import { gsap, MOTION_OK, useGSAP } from '../../lib/gsap'
 import { AssetImage } from '../ui/AssetImage'
 import { Icon } from '../ui/Icon'

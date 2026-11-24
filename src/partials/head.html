@@ -1,0 +1,105 @@
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#17120c" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Products Palace" />
+    <!--
+      Critical loader styles. They live here (not in the Tailwind bundle) so the loader
+      paints before any stylesheet, font or script arrives. Values mirror the tokens:
+      accent = --color-brass-500, fade = 600ms --ease-luxe.
+    -->
+    <style>
+      .app-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        background: #000;
+        transition:
+          opacity 0.6s cubic-bezier(0.645, 0.045, 0.355, 1),
+          visibility 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+        /* Failsafe: never trap the page if scripts fail to run. */
+        animation: app-loader-failsafe 0.6s ease 10s forwards;
+      }
+      .app-loader.is-loaded {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .app-loader__ring {
+        position: absolute;
+        inset: 0;
+        width: 120px;
+        height: 120px;
+        margin: auto;
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+      }
+      .app-loader__arc {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 30px;
+        height: 120px;
+        margin: -60px 0 0 -60px;
+        overflow: hidden;
+        transform-origin: 60px 60px;
+        animation: app-loader-spin 1.2s linear infinite;
+      }
+      .app-loader__arc::before {
+        content: "";
+        display: block;
+        width: 118px;
+        height: 118px;
+        border: 1px solid transparent;
+        border-radius: 50%;
+        background:
+          linear-gradient(#000, #000) padding-box,
+          linear-gradient(rgb(255 255 255 / 0.44), rgb(255 255 255 / 0)) border-box;
+      }
+      .app-loader__logo {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        color: #fff;
+        font: 800 8.5px/1 Manrope, ui-sans-serif, system-ui, sans-serif;
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+      }
+      .app-loader__logo svg {
+        width: 12px;
+        height: 12px;
+        color: #d4a23a;
+      }
+      .app-loader__logo small {
+        display: block;
+        margin-top: 3px;
+        font-size: 3.2px;
+        font-weight: 700;
+        letter-spacing: 0.55em;
+        text-align: right;
+      }
+      @keyframes app-loader-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes app-loader-failsafe {
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .app-loader__arc {
+          animation: none;
+        }
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..800&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..500&display=swap"
+    />

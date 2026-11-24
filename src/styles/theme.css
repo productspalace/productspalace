@@ -159,6 +159,26 @@
   --animate-gold-pulse: gold-pulse 2s ease-in-out infinite;
   --animate-spin-slow: loader-spin 25s linear infinite;
 
+  /* ---------- About page additions (see docs/design-system.md) ---------- */
+  --animate-mask-reveal: mask-reveal 1.2s var(--ease-reveal) both;
+  --animate-mask-zoom: mask-zoom 1.6s var(--ease-reveal) backwards;
+
+  @keyframes mask-reveal {
+    from {
+      clip-path: inset(100% 0 0 0);
+    }
+    to {
+      clip-path: inset(0);
+    }
+  }
+
+  /* `backwards` fill only: once finished, hover transforms work again. */
+  @keyframes mask-zoom {
+    from {
+      transform: scale(1.12);
+    }
+  }
+
   @keyframes loader-spin {
     to {
       transform: rotate(360deg);

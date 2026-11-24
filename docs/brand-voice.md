@@ -2,8 +2,9 @@
 
 How Products Palace sounds, and the rules for writing anything the website says.
 Source of truth: **Products Palace Brand Story** (Lagos, 2026). When this guide and the brand story
-disagree, the brand story wins. Reused copy lives in `src/content/brand.ts`, and homepage copy
-lives in `src/content/home.ts`.
+disagree, the brand story wins. Reused copy lives in `src/content/brand.ts`, navigation and footer
+copy in `src/content/site.ts`, homepage copy in `src/content/home.ts` and About page copy in
+`src/content/about.ts`.
 
 ## 1. Purpose
 
@@ -148,6 +149,18 @@ best · No. 1.
   converges on it.
 - Approved set: *Register your interest*, *Register interest* (tight spaces), *Who we build for*,
   *Find your place*, *See where they begin*, *Let’s talk about home* (contact heading).
+- The same label may point to the nearest matching content: on the About page *Who we build for*
+  scrolls to its own households section, and *Find your place* opens the homepage's first address.
+- Links between pages are built in `src/content/site.ts` (`routes`, `homeSection()`), never typed
+  by hand.
+
+### Page roles
+
+- **Homepage:** what life in a Products Palace home could feel like (scenes, the moment, the homes).
+- **About page:** why Products Palace wants to make that life possible (the question, the belief,
+  the people, the commitments, the first proof). It deepens the homepage and never repeats its
+  copy word for word.
+- **Proposed statements** (purpose, vision) are flagged as proposed in the docs until approved.
 
 ## 13. Content accuracy rules
 
