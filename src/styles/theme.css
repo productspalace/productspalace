@@ -129,6 +129,7 @@
 
   /* ---------- Breakpoints ---------- */
   /* sm 40rem, md 48rem, lg 64rem stay default. Desktop starts at 1200px. */
+  --breakpoint-laptop: 64.0625rem; /* 1025px: first width where process cards sit in a grid */
   --breakpoint-xl: 75rem;
   --breakpoint-2xl: 90rem;
 
@@ -145,4 +146,61 @@
   /* ---------- Motion ---------- */
   --ease-luxe: cubic-bezier(0.645, 0.045, 0.355, 1); /* UI state changes */
   --ease-reveal: cubic-bezier(0.2, 0.7, 0.2, 1); /* slow image zooms, reveals */
+  --ease-header: cubic-bezier(0.24, 0.74, 0.58, 1); /* sticky header slide-in */
+
+  /* ---------- Homepage additions (see docs/design-system.md) ---------- */
+  --spacing-header-mobile: 5.625rem; /* 90px fixed bar below 1200px */
+  --spacing-header-sticky: 4rem; /* 64px condensed desktop header */
+  --aspect-news: 1048 / 676;
+
+  --animate-fade-in-up: fade-in-up 1s ease both;
+  --animate-fade-in-right: fade-in-right 1s ease both;
+  --animate-text-enter: text-enter 0.6s ease both;
+  --animate-gold-pulse: gold-pulse 2s ease-in-out infinite;
+  --animate-spin-slow: loader-spin 25s linear infinite;
+
+  @keyframes loader-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 100%, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes fade-in-right {
+    from {
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes text-enter {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes gold-pulse {
+    50% {
+      box-shadow: 0 0 0 7px rgb(212 162 58 / 0.14);
+    }
+  }
 }

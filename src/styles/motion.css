@@ -1,0 +1,29 @@
+/* ==========================================================================
+   Scroll-reveal states. `data-reveal` elements are hidden only once JS has
+   marked the document `motion-ready`, so content never stays invisible if the
+   script fails. useRevealOnScroll() adds `is-revealed` when an element enters
+   the viewport (once).
+   ========================================================================== */
+
+@layer components {
+  .motion-ready [data-reveal]:not(.is-revealed) {
+    opacity: 0;
+  }
+
+  .motion-ready [data-reveal].is-revealed {
+    animation: var(--animate-fade-in-up);
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  .motion-ready [data-reveal="right"].is-revealed {
+    animation-name: fade-in-right;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motion-ready [data-reveal]:not(.is-revealed),
+    .motion-ready [data-reveal].is-revealed {
+      opacity: 1;
+      animation: none;
+    }
+  }
+}
