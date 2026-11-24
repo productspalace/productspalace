@@ -1,29 +1,47 @@
 /**
  * Homepage copy and data. Components render whatever is here, so copy can be
- * edited without touching layout. Values marked PLACEHOLDER are stand-ins that
- * must be confirmed by the business before launch.
+ * edited without touching layout.
+ *
+ * Source of truth: "Products Palace Brand Story". Voice rules: docs/brand-voice.md.
+ * Section-by-section intent: docs/homepage-content.md.
+ *
+ * The pilot development is PLANNED. Describe its homes and amenities as planned
+ * ("will", "planned"), never as finished or operational. Values marked
+ * PLACEHOLDER must be confirmed by the business before launch.
  */
-import { newsImages, processImages, projectImages, type ImageAsset } from './assets'
+import { brand, promises } from './brand'
+import { firstAddressImages, peopleImages, promiseImages, type ImageAsset } from './assets'
 
 export type Link = { label: string; href: string }
 
-export const brand = {
-  name: 'Products Palace',
-  tagline: 'Real Estate',
-}
+/** Section anchors, shared by navigation, CTAs and the section elements themselves. */
+export const anchors = {
+  top: 'top',
+  story: 'about',
+  people: 'people',
+  belief: 'belief',
+  promise: 'promise',
+  moment: 'moment',
+  firstAddress: 'first-address',
+  contact: 'contact',
+} as const
+
+const to = (id: string) => `#${id}`
+
+/** One call to action, used wherever the visitor is invited to act. Leads to the form in the footer. */
+const registerInterest: Link = { label: 'Register your interest', href: to(anchors.contact) }
 
 export const mainNav: Link[] = [
-  { label: 'Home', href: '#top' },
-  { label: 'About', href: '#about' },
-  { label: 'Member Companies', href: '#companies' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Media', href: '#news' },
+  { label: 'Our story', href: to(anchors.story) },
+  { label: 'Who we build for', href: to(anchors.people) },
+  { label: 'Our promise', href: to(anchors.promise) },
+  { label: 'The homes', href: to(anchors.firstAddress) },
 ]
 
 export type SocialId = 'facebook' | 'x' | 'youtube' | 'instagram' | 'linkedin' | 'whatsapp'
 export type SocialLink = { id: SocialId; label: string; href: string }
 
-// PLACEHOLDER: replace '#' with the real profile URLs.
+// PLACEHOLDER: replace '#' with the real profile URLs, and remove any channel the brand does not use.
 export const socials: SocialLink[] = [
   { id: 'facebook', label: 'Facebook', href: '#' },
   { id: 'x', label: 'X', href: '#' },
@@ -32,207 +50,247 @@ export const socials: SocialLink[] = [
   { id: 'linkedin', label: 'LinkedIn', href: '#' },
 ]
 
-// PLACEHOLDER contact details.
 export const contact = {
-  cta: { label: 'Get in touch', href: '#contact' },
-  whatsapp: { label: 'Chat with us on WhatsApp', href: '#contact' },
-  addresses: ['12 Palace Avenue, Central Business District', '4 Riverside Close, Waterfront Quarter'],
+  cta: { label: 'Register interest', href: to(anchors.contact) },
+  // PLACEHOLDER: WhatsApp link (https://wa.me/<number>).
+  whatsapp: { label: 'Chat with us on WhatsApp', href: to(anchors.contact) },
+  // PLACEHOLDER: office address. The brand story places Products Palace in Lagos; nothing more specific is confirmed.
+  addresses: ['Lagos, Nigeria'],
+  // PLACEHOLDER: confirm the mailbox exists.
   email: 'hello@productspalace.com',
-  phone: '+1 (555) 010-2030',
-  hours: { label: 'Office hours:', value: 'Mon – Sat, 8am – 6pm' },
+  // PLACEHOLDER: real phone number.
+  phone: '+234 000 000 0000',
+  // PLACEHOLDER: confirm office hours.
+  hours: { label: 'Office hours:', value: 'Mon – Fri, 9am – 5pm' },
 }
 
-// PLACEHOLDER figures.
-export const heroStats = [
-  { value: '1200', suffix: '+', label: 'Homes delivered' },
-  { value: '18', suffix: '+', label: 'Completed developments' },
-  { value: '350', suffix: '+', label: 'Team members' },
-  { value: '6', suffix: '', label: 'Member companies' },
-]
+/* -------------------------------------------------------------------------- */
+/* 1. Hero: recognition                                                        */
+/* -------------------------------------------------------------------------- */
+
+export const hero = {
+  eyebrow: brand.tagline,
+  title: 'A home for the life you’re working towards.',
+  text: 'Homes planned for peace at the end of the day, privacy to grow, and unhurried time with the people you love.',
+  cta: registerInterest,
+  secondary: { label: 'Who we build for', href: to(anchors.people) },
+  /** Facts about the pilot development, all from the brand story. Desktop bar at the foot of the hero. */
+  highlights: {
+    caption: ['Planned for', 'our first address'] as const,
+    items: [
+      { value: '2 · 3 · 4', label: 'Bedroom maisonettes' },
+      { value: 'Boys’ quarters', label: 'With every home' },
+      { value: 'Padel court', label: 'And a play area' },
+      { value: 'One gate', label: 'A managed community' },
+    ],
+  },
+  followLabel: 'Follow us',
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. Our story: connection                                                    */
+/* -------------------------------------------------------------------------- */
 
 export const about = {
-  kicker: 'About Products Palace',
-  title: ['A Trusted Name in ', 'Luxury', ' Real Estate.'] as const,
+  kicker: 'Our story',
+  title: ['A Home That ', 'Owes You', ' Something.'] as const,
   paragraphs: [
-    'Products Palace develops and manages residences for people who expect more from the places they live. From the first sketch to the final handover, every home is shaped by careful planning, honest pricing and finishes chosen to last.',
-    'Our portfolio spans waterfront apartments, garden villas and serviced residences in fast-growing city districts. Each project pairs contemporary architecture with everyday comfort, so homeowners and investors can commit with confidence.',
+    'Lagos rewards ambition, and asks a great deal of the people who carry it. The professional who leaves before sunrise and returns after dark. The young couple protecting a new marriage from a city that never stops talking. The parents who wonder what their children are absorbing beyond the gate. We know these people well, because we are these people.',
+    'So we began with one honest question: what does a home owe the person who works this hard? Not more marble, or a bigger chandelier to photograph. It owes you peace, safety and unhurried time with the people you love. Everything we build is our answer.',
   ],
-  cta: { label: 'Discover our story', href: '#expertise' },
+  cta: { label: 'Who we build for', href: to(anchors.people) },
 }
 
-export type Project = {
-  tag: string
-  location: string
+/* -------------------------------------------------------------------------- */
+/* 3. The lives we design around: imagination                                  */
+/* -------------------------------------------------------------------------- */
+
+export type LifeStory = {
+  /** The household, shown on the image. */
+  person: string
+  /** When the scene happens. */
+  moment: string
   title: string
-  description: string
-  price: string
-  type: string
-  href: string
+  story: string
+  home: string
+  gives: string
   image: ImageAsset
 }
 
-export const showcase = {
-  kicker: ['Our projects', 'The collection'] as const,
-  title: ['Remarkable Homes. ', 'Elevated Living.'] as const,
-  link: { label: 'Explore all projects', href: '#projects' },
-  imageCaption: 'Products Palace',
-  infoLabel: 'Featured development',
-  footer: ['Designed for exceptional living', 'PP'] as const,
-  ctaLabel: 'Explore this project',
+export const people = {
+  kicker: ['Our people', 'Seasons of life'] as const,
+  title: ['Every Home Begins ', 'With a Person.'] as const,
+  link: { label: 'Find your place', href: to(anchors.firstAddress) },
+  imageCaption: brand.tagline,
+  infoLabel: 'Picture it',
+  detailLabels: { home: 'The home', gives: 'What it makes possible' },
+  footer: 'Designed around real lives',
+  cta: registerInterest,
+  labels: {
+    region: 'The lives we design around',
+    show: 'Show the story of',
+    previous: 'Previous story',
+    next: 'Next story',
+  },
   /** Autoplay interval observed on the reference. */
   interval: 6000,
-  // PLACEHOLDER projects, prices and descriptions.
-  projects: [
+  stories: [
     {
-      tag: 'Waterfront living',
-      location: 'Waterfront District',
-      title: 'The Crescent Residences',
-      description: 'Light-filled apartments set along the water, with private terraces, a residents’ lounge and a pool that faces the evening sun.',
-      price: '$840,000',
-      type: 'Premium Apartments',
-      href: '#projects',
-      image: projectImages[0],
+      person: 'The one who is building',
+      moment: 'Sunday afternoon',
+      title: 'Room to hear yourself think.',
+      story: 'Half the city is at an owambe. You’re at the desk by the window, tea going cold. Nobody is knocking, no generator is roaring next door, and for the first time all week you can think clearly about the dream you haven’t told anyone yet.',
+      home: 'Two, three or four bedrooms',
+      gives: 'Focus, rest and calm',
+      image: peopleImages[0],
     },
     {
-      tag: 'Garden villas',
-      location: 'Hillside Estate',
-      title: 'Palace Gardens Villas',
-      description: 'Detached villas wrapped in mature landscaping, each with a private pool, double-height living spaces and room for a growing family.',
-      price: '$1,250,000',
-      type: 'Luxury Villas',
-      href: '#projects',
-      image: projectImages[1],
+      person: 'The newlyweds',
+      moment: 'Friday night',
+      title: 'Just the two of you.',
+      story: 'Neither of you wants to go out. The drive home was short, and dinner is something you’re cooking together, badly and happily. Nobody drops in unannounced. Years from now, you’ll call these the good old days.',
+      home: 'Two-bedroom maisonette',
+      gives: 'Privacy to grow together',
+      image: peopleImages[1],
     },
     {
-      tag: 'Skyline homes',
-      location: 'Central Business District',
-      title: 'Meridian Tower',
-      description: 'A slender residential tower with panoramic city views, concierge services and a sky garden shared by every resident.',
-      price: '$620,000',
-      type: 'Residences & Penthouses',
-      href: '#projects',
-      image: projectImages[2],
+      person: 'The growing family',
+      moment: 'Saturday morning',
+      title: 'The childhood you promised them.',
+      story: 'Your son wobbles past on a bicycle a little too big for him, and you don’t worry: you know every child in the play area and every parent watching from its edge. Upstairs, your daughter has covered her own bedroom door with drawings.',
+      home: 'Three-bedroom maisonette',
+      gives: 'Room for each child to grow',
+      image: peopleImages[2],
     },
     {
-      tag: 'Urban lofts',
-      location: 'Riverside Quarter',
-      title: 'The Linden Lofts',
-      description: 'Loft-style homes with generous ceiling heights and warm, practical interiors, a short walk from the riverside promenade.',
-      price: '$480,000',
-      type: 'Lofts & Duplexes',
-      href: '#projects',
-      image: projectImages[3],
+      person: 'The family that has arrived',
+      moment: 'Christmas Eve',
+      title: 'Room for everyone you love.',
+      story: 'Your parents are settled in the guest room and the children are home from school. Every car has found a space. In the kitchen, someone is laughing too loudly over the jollof, and you think: this is what all those years of work were for.',
+      home: 'Four-bedroom maisonette',
+      gives: 'Generations under one roof',
+      image: peopleImages[3],
     },
-    {
-      tag: 'Family homes',
-      location: 'Harbour Bay',
-      title: 'Harbour View Homes',
-      description: 'A quiet, gated community of terraced and detached homes with green walkways, play areas and easy access to the coast.',
-      price: '$560,000',
-      type: 'Terraces & Detached Homes',
-      href: '#projects',
-      image: projectImages[4],
-    },
-  ] satisfies Project[],
+  ] satisfies LifeStory[],
 }
 
-export const expertise = {
-  title: 'Expertise',
-  subtitle: 'Where considered design meets dependable delivery.',
+/* -------------------------------------------------------------------------- */
+/* 4. Luxury, redefined: belief                                                */
+/* -------------------------------------------------------------------------- */
+
+export const belief = {
+  title: 'Luxury, Redefined.',
+  subtitle: 'Not the destination. The firm ground you stand on while you build what truly matters.',
   pillars: [
-    { title: 'Innovation', text: 'Forward-looking design that rethinks how people live, work and gather.' },
-    { title: 'Integrity', text: 'Clear terms and open communication at every stage of ownership.' },
-    { title: 'Excellence', text: 'Exacting standards from the first drawing to the final key.' },
-    { title: 'Sustainability', text: 'Efficient buildings and communities designed to age well.' },
+    { title: 'Security', text: 'The kind that lets a mother sleep through the night.' },
+    { title: 'Stillness', text: 'Room to finish the brief at home without fighting for silence.' },
+    { title: 'Time', text: 'Minutes won back from traffic and spent at the dinner table instead.' },
+    { title: 'Privacy', text: 'A protected community, so home is a place to rest, not a stage to perform on.' },
   ],
   filmLabel: 'Play the Products Palace brand film',
-  membersMeta: '© 2016 — 2026', // PLACEHOLDER founding year
-  membersTitle: 'Member Companies',
+  statement: {
+    meta: 'On exclusivity',
+    text: 'We don’t close the gate to feel above the world outside it. We close it so parents can choose the influences around their children, and home can be a place of rest.',
+    signature: [brand.exclusivity, brand.tagline] as const,
+  },
 }
 
-export const process = {
-  kicker: 'How it works',
-  title: 'Four Steps to Your New Home',
-  steps: [
-    { title: 'Explore', text: 'Browse our portfolio of residences and shortlist the developments that suit the way you live.', image: processImages[0] },
-    { title: 'Consult', text: 'Meet a property advisor who walks you through available units, pricing and flexible payment plans.', image: processImages[1] },
-    { title: 'Reserve', text: 'Secure your chosen home with a reservation while our legal team prepares the paperwork.', image: processImages[2] },
-    { title: 'Move in', text: 'Complete your purchase, collect your keys and settle into a home finished with care.', image: processImages[3] },
-  ],
-  cta: { lead: 'Ready to take the first step?', label: 'Talk to our team', href: '#contact' },
+/* -------------------------------------------------------------------------- */
+/* 5. Our promise: reassurance                                                 */
+/* -------------------------------------------------------------------------- */
+
+export const promise = {
+  kicker: 'Our promise',
+  title: 'What You Can Count On',
+  items: promises.map((p, i) => ({ ...p, image: promiseImages[i] })),
+  cta: {
+    lead: 'Not features, but the conditions for a good life.',
+    label: 'See where they begin',
+    href: to(anchors.firstAddress),
+  },
 }
 
-// PLACEHOLDER testimonials: replace with approved client quotes.
-export const testimonials = {
-  kicker: 'Testimonials',
-  title: 'Words From Our Homeowners',
-  items: [
+/* -------------------------------------------------------------------------- */
+/* 6. The moment we build for: imagination                                     */
+/* -------------------------------------------------------------------------- */
+
+export const moment = {
+  kicker: 'The moment we build for',
+  title: 'A Quarter Past Seven, on a Weekday Evening',
+  navLabel: 'Moments',
+  beats: [
+    { time: '7:15 pm', label: 'The gate', text: 'The traffic is behind you now. The gate opens, and the guard greets you by name.' },
+    { time: '7:16 pm', label: 'The threshold', text: 'Somewhere between the car door and the front door, the day lets go of you.' },
+    { time: '7:18 pm', label: 'The quiet', text: 'Inside, the house is quiet in the way you hoped it would be. Upstairs, a child is reading aloud to no one in particular.' },
+    { time: '7:19 pm', label: 'Home', text: 'Someone has left a light on for you. You set your bag down, and notice you’ve finally stopped carrying the day in your shoulders.' },
+  ],
+  closing: 'That moment is the reason Products Palace exists.',
+}
+
+/* -------------------------------------------------------------------------- */
+/* 7. Our first address: trust                                                 */
+/* -------------------------------------------------------------------------- */
+
+export const firstAddress = {
+  kicker: 'Our first address',
+  title: 'Where the Story Begins',
+  intro: 'Every promise needs a first proof. Our pilot development will bring every household in this story together behind one gate. We’ll share the full details of the homes in time. For now, picture it.',
+  cta: registerInterest,
+  status: 'Planned',
+  features: [
     {
-      quote: '“From our first viewing to the day we collected our keys, the team kept every promise they made. Payments were flexible, updates were regular and the finish of our apartment is even better than the show unit. We would happily buy from them again.”',
-      name: 'Adaeze O.',
-      role: 'Homeowner',
+      category: 'The homes',
+      title: 'A maisonette for every season of life',
+      text: 'Two, three and four-bedroom maisonettes, each with its own boys’ quarters, so the help you rely on is close at hand and your privacy stays your own.',
+      image: firstAddressImages[0],
     },
     {
-      quote: '“As an investor I look closely at delivery timelines and build quality. Products Palace handed over on schedule, the documentation was clean and the units let quickly. It is rare to find a developer this organised and this transparent.”',
-      name: 'Michael T.',
-      role: 'Investor',
+      category: 'Community',
+      title: 'Weekends that turn neighbours into friends',
+      text: 'A padel court for the Saturday game, and a play area where children can run within sight of home.',
+      image: firstAddressImages[1],
     },
     {
-      quote: '“We were nervous about buying off-plan, but our advisor explained every step and never rushed us. Living here now, we notice the small details every day: the light, the storage, the quiet. It truly feels like home.”',
-      name: 'Sarah K.',
-      role: 'Resident',
+      category: 'Arriving',
+      title: 'Room for every car, and every guest',
+      text: 'Generous parking, so arriving home is never the hardest part of the day, even when the whole family comes for Christmas.',
+      image: firstAddressImages[2],
     },
   ],
 }
 
-// PLACEHOLDER articles.
-export const news = {
-  kicker: 'News & insights',
-  title: 'Stories, Updates and Insights From Our Team',
-  cta: { label: 'More news', href: '#news' },
-  readMore: 'Read more',
-  posts: [
-    { category: 'Buyer guide', date: 'Nov 18, 2026', title: 'What to Check Before Buying an Off-Plan Home', href: '#news', image: newsImages[0] },
-    { category: 'Behind the build', date: 'Nov 12, 2026', title: 'Inside the Design Process for Meridian Tower', href: '#news', image: newsImages[1] },
-    { category: 'Insights', date: 'Nov 5, 2026', title: 'Why Location Still Shapes Long-Term Property Value', href: '#news', image: newsImages[2] },
-  ],
-}
+/* -------------------------------------------------------------------------- */
+/* Footer: action                                                              */
+/* -------------------------------------------------------------------------- */
 
 export const footer = {
-  newsletter: {
-    title: ['Stay ', 'Informed'] as const,
-    text: 'Get new project launches, investor updates and lifestyle stories from Products Palace, straight to your inbox.',
+  register: {
+    title: ['Register Your ', 'Interest'] as const,
+    text: 'Be among the first to hear as the details of our first address are shared. Only what matters, and only when there is something worth saying.',
     placeholder: 'Your email address',
-    button: 'Subscribe',
-    success: 'Thank you. You are on the list.',
+    button: 'Register interest',
+    success: 'Thank you. We’ll be in touch as the details are shared.',
   },
-  blurb: 'Thoughtfully designed residences, delivered with care and built to hold their value for years to come.',
+  blurb: brand.closing,
   quickLinks: {
-    title: 'Quick links',
+    title: 'Explore',
     links: [
-      { label: 'Home', href: '#top' },
-      { label: 'About us', href: '#about' },
-      { label: 'Projects', href: '#projects' },
-      { label: 'Work with us', href: '#contact' },
-      { label: 'Partner with us', href: '#contact' },
-      { label: 'Contact', href: '#contact' },
-      { label: 'Blog', href: '#news' },
-      { label: 'News', href: '#news' },
-      { label: 'Events', href: '#news' },
-      { label: 'Privacy policy', href: '#top' },
+      { label: 'Home', href: to(anchors.top) },
+      { label: 'Our story', href: to(anchors.story) },
+      { label: 'Who we build for', href: to(anchors.people) },
+      { label: 'What we believe', href: to(anchors.belief) },
+      { label: 'Our promise', href: to(anchors.promise) },
+      { label: 'The homes', href: to(anchors.firstAddress) },
+      { label: 'Register interest', href: to(anchors.contact) },
+      // PLACEHOLDER: link to the privacy policy once it exists.
+      { label: 'Privacy policy', href: to(anchors.top) },
     ] satisfies Link[],
   },
-  subsidiaries: {
-    title: 'Member companies',
-    links: [
-      { label: 'Palace Homes', href: '#companies' },
-      { label: 'PP Capital', href: '#companies' },
-      { label: 'Palace Estates', href: '#companies' },
-      { label: 'Palace Living', href: '#companies' },
-      { label: 'Build Contractors', href: '#companies' },
-    ] satisfies Link[],
+  promises: {
+    title: 'What you can count on',
+    links: promises.map((p) => ({ label: p.title, href: to(anchors.promise) })) satisfies Link[],
   },
-  contactTitle: 'Catch us here',
-  marquee: 'Products Palace',
-  copyright: `Copyright © Products Palace ${new Date().getFullYear()}`,
+  contactTitle: 'Let’s talk about home',
+  marquee: brand.tagline,
+  copyright: `Copyright © ${brand.name} ${new Date().getFullYear()}`,
 }

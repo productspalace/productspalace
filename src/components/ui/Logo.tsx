@@ -1,4 +1,4 @@
-import { brand } from '../../content/home'
+import { brand } from '../../content/brand'
 
 /**
  * TEMPORARY brand logo: an original arch mark plus wordmark. Replace the markup in
@@ -28,7 +28,7 @@ export function Logo({ tone = 'dark', className = '' }: { tone?: Tone; className
         <span className="font-sans text-[1em] font-extrabold tracking-[-0.01em] uppercase">{brand.name}</span>
         <span className="mt-[0.3em] flex items-center gap-[0.5em] self-end font-sans text-[0.38em] font-bold tracking-[0.55em] uppercase">
           <span className="h-px w-[2.2em] bg-accent" />
-          {brand.tagline}
+          {brand.descriptor}
         </span>
       </span>
     </span>

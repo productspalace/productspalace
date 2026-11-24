@@ -14,7 +14,7 @@ homepage component lives.
 | `--spacing-header-mobile` | `5.625rem` (90 px) | Fixed bar below 1200 px; utility `h-header-mobile` |
 | `--spacing-header-sticky` | `4rem` (64 px) | Condensed desktop header; utility `h-header-sticky` |
 | `--aspect-news` | `1048 / 676` | News card images; utility `aspect-news` |
-| `--breakpoint-laptop` | `64.0625rem` (1025 px) | Process cards switch from track to grid above 1024 px. A token (not `min-[1025px]:`) keeps media-query order correct in Tailwind v4 |
+| `--breakpoint-laptop` | `64.0625rem` (1025 px) | Originally where the 4 process cards became a grid (the 5 promise cards now switch at `xl`); kept for future use. A token (not `min-[1025px]:`) keeps media-query order correct in Tailwind v4 |
 | `--animate-fade-in-up` / `--animate-fade-in-right` | 1 s `ease` | Scroll-reveal entrances |
 | `--animate-text-enter` | .6 s | Showcase info re-entry |
 | `--animate-gold-pulse` | 2 s | Showcase label dot |
@@ -56,14 +56,16 @@ homepage component lives.
 | `SiteHeader`, `MobileMenu` | `src/components/layout/` | Transparent / sticky / mobile variants |
 | `SiteFooter` | `src/components/layout/SiteFooter.tsx` | Newsletter, columns, marquee, bottom bar |
 | `ScrollTopButton`, `CustomCursor` | `src/components/layout/` | Floating utilities |
-| `Hero` | `src/components/home/Hero.tsx` | Film or slideshow, social rail, stats |
-| `AboutSection` | `src/components/home/AboutSection.tsx` | Includes the lifestyle mosaic |
-| `ProjectShowcase` | `src/components/home/ProjectShowcase.tsx` | Autoplay featured-development slider |
-| `ExpertiseSection`, `VideoLightbox` | `src/components/home/` | Pillars, clipped film, member logos |
-| `ProcessSection` | `src/components/home/ProcessSection.tsx` | Step cards |
-| `TestimonialsSection` | `src/components/home/TestimonialsSection.tsx` | Quote track |
-| `NewsSection` | `src/components/home/NewsSection.tsx` | Article cards |
+| `Hero` | `src/components/home/Hero.tsx` | Film or slideshow, headline block, social rail, first-address highlights bar |
+| `AboutSection` | `src/components/home/AboutSection.tsx` | Our story; includes the lifestyle mosaic |
+| `ProjectShowcase` | `src/components/home/ProjectShowcase.tsx` | Seasons of life: autoplay slider, one household per slide |
+| `ExpertiseSection`, `VideoLightbox` | `src/components/home/` | Luxury, redefined: pillars, clipped film, exclusivity statement |
+| `ProcessSection` | `src/components/home/ProcessSection.tsx` | Our promise: 5 photo cards (grid from `xl`) |
+| `TestimonialsSection` | `src/components/home/TestimonialsSection.tsx` | The moment we build for: story-beat track |
+| `NewsSection` | `src/components/home/NewsSection.tsx` | Our first address: planned-feature cards |
 | `HomePage` | `src/pages/HomePage.tsx` | Section order |
 
-Content and copy: `src/content/home.ts`. Assets: `src/content/assets.ts` (see `/asset-manifest.md`).
+Content and copy: `src/content/home.ts` (homepage) and `src/content/brand.ts` (reused brand messages);
+see `docs/homepage-content.md` and `docs/brand-voice.md`. Assets: `src/content/assets.ts` (see `/asset-manifest.md`).
+Component file names follow the reference layout; the table says what each now renders.
 Reference audit: `docs/homepage-reference-audit.md`.

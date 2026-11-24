@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import { aboutGallery } from '../../content/assets'
-import { about } from '../../content/home'
+import { about, anchors } from '../../content/home'
 import { AssetImage } from '../ui/AssetImage'
 import { Highlight, SectionHeading } from '../ui/SectionHeading'
 
@@ -25,7 +25,7 @@ function LifestyleGallery() {
 export function AboutSection() {
   const [before, word, after] = about.title
   return (
-    <section id="about" className="section">
+    <section id={anchors.story} className="section">
       <div className="container-page grid gap-12 xl:grid-cols-[minmax(0,32.5rem)_minmax(0,40.3rem)] xl:items-start xl:justify-between">
         <div>
           <SectionHeading
