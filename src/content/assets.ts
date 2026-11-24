@@ -57,39 +57,35 @@ export const aboutGallery: ImageAsset[] = [
   img('about-04', 'about/lifestyle-04.jpg', 'Tropical pool deck surrounded by palms', 1000, 860, 'center 55%'),
 ]
 
-export const projectImages: ImageAsset[] = [
-  img('project-01', 'projects/project-01.jpg', 'The Crescent Residences, villa exterior with pool', 1400, 1220),
-  img('project-02', 'projects/project-02.jpg', 'Palace Gardens Villas, white villa with infinity pool', 1400, 1220),
-  img('project-03', 'projects/project-03.jpg', 'Meridian Tower, apartment facade against a blue sky', 1400, 1220),
-  img('project-04', 'projects/project-04.jpg', 'The Linden Lofts, contemporary apartment block', 1400, 1220),
-  img('project-05', 'projects/project-05.jpg', 'Harbour View Homes, modern family house', 1400, 1220),
+/**
+ * "The lives we design around" carousel, one image per household (same order as
+ * `people.stories` in home.ts). Placeholders reuse photos from other folders.
+ */
+export const peopleImages: ImageAsset[] = [
+  img('people-building', 'process/step-02.jpg', 'A woman working at her laptop at a quiet desk', 640, 900, 'center 35%'),
+  img('people-newlyweds', 'about/lifestyle-03.jpg', 'A bright kitchen with a marble island, set for cooking at home', 520, 900),
+  img('people-family', 'process/step-04.jpg', 'A family house with a lawn and a wide driveway', 640, 900),
+  img('people-arrived', 'expertise/film-poster.jpg', 'A spacious living room with room for the whole family to gather', 1920, 1080),
 ]
 
 export const expertiseFilm: VideoAsset = {
   id: 'expertise-film',
   src: undefined,
-  poster: img('expertise-film-poster', 'expertise/film-poster.jpg', 'Living room interior from the Products Palace brand film', 1920, 1080),
+  poster: img('expertise-film-poster', 'expertise/film-poster.jpg', 'A calm, sunlit living room', 1920, 1080),
 }
 
-export const processImages: ImageAsset[] = [
-  img('process-01', 'process/step-01.jpg', 'Residence exterior with pool', 640, 900),
-  img('process-02', 'process/step-02.jpg', 'Advisor meeting a client', 640, 900),
-  img('process-03', 'process/step-03.jpg', 'Handshake over a signed agreement', 640, 900),
-  img('process-04', 'process/step-04.jpg', 'Family home ready to move into', 640, 900),
+/** "Our promise" cards (decorative, under a dark gradient), same order as `promises` in brand.ts. */
+export const promiseImages: ImageAsset[] = [
+  img('promise-safety', 'hero/hero-01.jpg', 'A home lit warmly at dusk', 1920, 1080),
+  img('promise-quiet', 'about/lifestyle-02.jpg', 'A calm bedroom', 720, 600),
+  img('promise-neighbours', 'projects/project-03.jpg', 'Homes with neighbouring balconies', 1400, 1220),
+  img('promise-time', 'about/lifestyle-03.jpg', 'A kitchen ready for dinner at home', 520, 900),
+  img('promise-quality', 'projects/project-04.jpg', 'Carefully detailed residential architecture', 1400, 1220),
 ]
 
-export const newsImages: ImageAsset[] = [
-  img('news-01', 'news/news-01.jpg', 'City towers seen from street level', 1048, 676),
-  img('news-02', 'news/news-02.jpg', 'Team presenting during a workshop', 1048, 676),
-  img('news-03', 'news/news-03.jpg', 'Apartment buildings among trees', 1048, 676),
-]
-
-/** Member-company logos. White artwork on transparent, shown on black. */
-export const memberLogos: ImageAsset[] = [
-  img('logo-homes', 'logos/palace-homes.svg', 'Palace Homes', 200, 60),
-  img('logo-capital', 'logos/palace-capital.svg', 'Palace Capital', 200, 60),
-  img('logo-build', 'logos/palace-build.svg', 'Palace Build', 200, 60),
-  img('logo-estates', 'logos/palace-estates.svg', 'Palace Estates', 200, 60),
-  img('logo-living', 'logos/palace-living.svg', 'Palace Living', 200, 60),
-  img('logo-ventures', 'logos/palace-ventures.svg', 'Palace Ventures', 200, 60),
+/** "Our first address" cards, same order as `firstAddress.features` in home.ts. */
+export const firstAddressImages: ImageAsset[] = [
+  img('address-homes', 'projects/project-05.jpg', 'A modern two-storey home with a front lawn', 1400, 1220),
+  img('address-community', 'news/news-03.jpg', 'Homes set among trees', 1048, 676),
+  img('address-arrival', 'process/step-04.jpg', 'A home with a driveway and space to park', 640, 900),
 ]

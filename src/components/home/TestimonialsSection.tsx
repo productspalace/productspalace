@@ -1,12 +1,15 @@
 import { useRef } from 'react'
-import { testimonials } from '../../content/home'
+import { anchors, moment } from '../../content/home'
 import { useSnapTrack } from '../../hooks/useSnapTrack'
 import { gsap, MOTION_OK, useGSAP } from '../../lib/gsap'
 import { CarouselNav } from '../ui/CarouselNav'
-import { Icon } from '../ui/Icon'
+import { LogoMark } from '../ui/Logo'
 import { SectionHeading } from '../ui/SectionHeading'
 
-/** Horizontal track of alternating light / dark quote cards that rise in on a scrubbed scroll. */
+/**
+ * "The moment we build for": the arrival home, told in short beats on a horizontal
+ * track of alternating light / dark cards that rise in on a scrubbed scroll.
+ */
 export function TestimonialsSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const { trackRef, index, count, goTo, prev, next } = useSnapTrack<HTMLUListElement>()
@@ -33,35 +36,30 @@ export function TestimonialsSection() {
   )
 
   return (
-    <section ref={sectionRef} id="testimonials" className="bg-surface pt-12 pb-20 lg:pb-24">
+    <section ref={sectionRef} id={anchors.moment} className="bg-surface pt-12 pb-20 lg:pb-24">
       <div className="container-page">
-        <SectionHeading kicker={testimonials.kicker} title={testimonials.title} />
+        <SectionHeading kicker={moment.kicker} title={moment.title} className="max-w-[48rem]" />
 
         <ul ref={trackRef} className="scrollbar-none mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto pt-2 pb-8 lg:mt-[4.4rem]">
-          {testimonials.items.map((t, i) => {
+          {moment.beats.map((beat, i) => {
             const dark = i % 2 === 1
             return (
               <li
-                key={t.name}
+                key={beat.time}
                 data-testimonial
-                className={`flex flex-[0_0_85%] snap-start flex-col rounded-card p-5 sm:p-[1.875rem] md:flex-[0_0_78%] xl:flex-[0_0_calc(50%-0.625rem)] ${
+                className={`flex min-h-[18rem] flex-[0_0_85%] snap-start flex-col rounded-card p-5 sm:p-[1.875rem] md:min-h-[20rem] md:flex-[0_0_78%] xl:flex-[0_0_calc(50%-0.625rem)] ${
                   dark ? 'bg-ink-950 text-white' : 'bg-white shadow-[0_10px_40px_rgb(15_13_10/0.08)]'
                 }`}
               >
-                <div className="flex gap-1 text-accent" role="img" aria-label="Rated 5 out of 5">
-                  {Array.from({ length: 5 }, (_, s) => (
-                    <Icon key={s} name="star" size={17} />
-                  ))}
-                </div>
-                <blockquote className={`mt-5 flex-1 text-lg leading-[1.4] md:text-xl ${dark ? 'text-white/65' : 'text-fg-muted'}`}>
-                  <p>{t.quote}</p>
-                </blockquote>
-                <div className="mt-12 flex items-end justify-between gap-4">
-                  <div>
-                    <p className="font-display text-[1.0625rem] leading-[1.75] font-medium">{t.name}</p>
-                    <p className={`mt-1 text-[0.9375rem] ${dark ? 'text-brass-400' : 'text-fg-muted'}`}>{t.role}</p>
-                  </div>
-                  <Icon name="quote" size={48} className={dark ? 'text-white/25' : 'text-brass-300'} />
+                <p className={`text-[0.8125rem] font-semibold tracking-[0.15em] uppercase ${dark ? 'text-brass-400' : 'text-accent-ink'}`}>
+                  <time>{beat.time}</time>
+                </p>
+                <p className={`mt-5 flex-1 font-display text-[1.375rem] leading-[1.4] font-light md:text-[1.75rem] ${dark ? 'text-white/85' : 'text-fg'}`}>
+                  {beat.text}
+                </p>
+                <div className="mt-10 flex items-end justify-between gap-4">
+                  <p className="font-display text-[1.0625rem] leading-[1.75] font-medium">{beat.label}</p>
+                  <LogoMark className={`h-10 w-auto ${dark ? 'text-white/25' : 'text-brass-300'}`} />
                 </div>
               </li>
             )
@@ -69,13 +67,17 @@ export function TestimonialsSection() {
         </ul>
 
         <CarouselNav
-          label="Testimonials"
+          label={moment.navLabel}
           count={count}
           index={index}
           onSelect={goTo}
           onPrev={prev}
           onNext={next}
         />
+
+        <p className="mt-12 text-center font-display text-xl leading-[1.5] text-fg md:mt-16 md:text-[2rem]" data-reveal="up">
+          {moment.closing}
+        </p>
       </div>
     </section>
   )

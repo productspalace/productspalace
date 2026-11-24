@@ -129,7 +129,7 @@
 
   /* ---------- Breakpoints ---------- */
   /* sm 40rem, md 48rem, lg 64rem stay default. Desktop starts at 1200px. */
-  --breakpoint-laptop: 64.0625rem; /* 1025px: first width where process cards sit in a grid */
+  --breakpoint-laptop: 64.0625rem; /* 1025px: laptop widths (promise cards now switch to a grid at xl) */
   --breakpoint-xl: 75rem;
   --breakpoint-2xl: 90rem;
 

@@ -52,12 +52,11 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
         <Logo className="text-[0.8125rem]" />
         <nav aria-label="Mobile" className="mt-10">
           <ul>
-            {mainNav.map((item, i) => (
+            {mainNav.map((item) => (
               <li key={item.href} className="border-b border-line">
                 <a
                   href={item.href}
                   onClick={onClose}
-                  aria-current={i === 0 ? 'page' : undefined}
                   className="block py-3.5 text-sm font-medium text-fg transition-colors hover:text-accent-ink aria-[current=page]:text-accent-ink"
                 >
                   {item.label}

@@ -1,6 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { heroFilm, heroSlides } from '../../content/assets'
-import { brand, heroStats, socials } from '../../content/home'
+import { anchors, hero, socials } from '../../content/home'
 import { prefersReducedMotion } from '../../lib/gsap'
 import { AssetImage } from '../ui/AssetImage'
 import { Icon } from '../ui/Icon'
@@ -74,7 +74,7 @@ function SocialRail() {
       style={{ '--reveal-delay': '300ms' } as CSSProperties}
       className="absolute top-[27%] right-6 z-10 hidden flex-col items-center gap-6 text-white md:flex xl:right-11"
     >
-      <span className="text-[0.8125rem] font-medium [writing-mode:vertical-rl] rotate-180">Follow us</span>
+      <span className="text-[0.8125rem] font-medium [writing-mode:vertical-rl] rotate-180">{hero.followLabel}</span>
       <span className="h-12 w-px bg-white/40" />
       <ul className="flex flex-col items-center gap-3.5 [--icon-cutout:#111]">
         {socials.map((s) => (
@@ -89,48 +89,103 @@ function SocialRail() {
   )
 }
 
-function HeroStats() {
+/** Planned facts about the first address, desktop only (the reference's stats bar). */
+function HeroHighlights() {
+  const { caption, items } = hero.highlights
   return (
     <div className="absolute inset-x-0 bottom-0 z-10 hidden h-[6.5rem] border-t border-white/10 bg-black/35 backdrop-blur-md xl:block">
-      <dl className="container-page grid h-full grid-cols-4">
-        {heroStats.map((stat) => (
-          <div key={stat.label} className="flex flex-col justify-center border-r border-white/10 pl-6">
-            <dt className="order-2 mt-1 font-display text-[0.6875rem] tracking-[0.24em] text-white/70 uppercase">
-              {stat.label}
-            </dt>
-            <dd className="order-1 font-display text-[2rem] leading-none font-light text-white">
-              {stat.value}
-              {stat.suffix && <span className="ml-2 text-accent">{stat.suffix}</span>}
-            </dd>
-          </div>
-        ))}
-      </dl>
+      <div className="container-page grid h-full grid-cols-[auto_repeat(4,minmax(0,1fr))]">
+        <p className="flex flex-col justify-center border-r border-white/10 pr-8 font-display text-[0.6875rem] leading-[1.7] tracking-[0.24em] text-accent uppercase">
+          <span>{caption[0]}</span>
+          <span>{caption[1]}</span>
+        </p>
+        <dl className="contents">
+          {items.map((item) => (
+            <div key={item.label} className="flex flex-col justify-center border-r border-white/10 pl-6 last:border-r-0">
+              <dt className="order-2 mt-1.5 font-display text-[0.6875rem] tracking-[0.24em] text-white/70 uppercase">
+                {item.label}
+              </dt>
+              <dd className="order-1 font-display text-[2rem] leading-none font-light text-white">{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  )
+}
+
+/** Headline block, bottom-left over the media; sits above the highlights bar on desktop. */
+function HeroIntro() {
+  return (
+    <div className="absolute inset-x-0 bottom-0 z-10 pb-8 md:pb-14 xl:pb-[calc(6.5rem+3.5rem)]">
+      <div className="container-page text-white">
+        <p data-reveal="up" style={{ '--reveal-delay': '200ms' } as CSSProperties} className="kicker mb-4 text-brass-400 md:mb-6">
+          {hero.eyebrow}
+        </p>
+        <h1
+          data-reveal="up"
+          style={{ '--reveal-delay': '300ms' } as CSSProperties}
+          className="type-h1 max-w-[12em] text-balance md:max-w-[13em]"
+        >
+          {hero.title}
+        </h1>
+        <p
+          data-reveal="up"
+          style={{ '--reveal-delay': '400ms' } as CSSProperties}
+          className="mt-6 hidden max-w-[32rem] text-lead leading-[1.6] text-white/85 md:block"
+        >
+          {hero.text}
+        </p>
+        <div
+          data-reveal="up"
+          style={{ '--reveal-delay': '500ms' } as CSSProperties}
+          className="mt-6 flex flex-wrap items-center gap-x-9 gap-y-4 md:mt-9"
+        >
+          <a href={hero.cta.href} className="btn btn-primary min-h-[3.125rem] hover:text-white">
+            {hero.cta.label}
+          </a>
+          <a href={hero.secondary.href} className="link-arrow hidden text-white md:inline-flex">
+            {hero.secondary.label}
+            <Icon name="arrow-right" size={19} />
+          </a>
+        </div>
+      </div>
     </div>
   )
 }
 
 /**
- * Hero: full-bleed media, no visible headline (the reference lets the film carry
- * the message). 422px slideshow on phones, video area from md, 100svh on desktop.
+ * Hero: full-bleed media with the brand headline bottom-left. 422px slideshow on
+ * phones, video area from md, 100svh on desktop.
  */
 export function Hero() {
   const hasFilm = Boolean(heroFilm.src)
   return (
     <section
-      id="top"
+      id={anchors.top}
       aria-label="Introduction"
       className="relative h-[26.375rem] overflow-hidden bg-ink-950 md:h-[51.25rem] lg:h-[60vw] xl:h-svh xl:min-h-[40rem]"
     >
-      <h1 className="sr-only">{brand.name}: luxury real estate developments</h1>
       <HeroSlideshow className={hasFilm ? 'md:hidden' : ''} />
       <HeroFilm />
-      {/* Legibility for the transparent desktop header and the stats bar */}
+      {/* Legibility for the transparent desktop header and the highlights bar */}
       <div
         aria-hidden="true"
         className="absolute inset-0 hidden bg-[linear-gradient(to_bottom,rgb(15_13_10/0.55),rgb(15_13_10/0)_28%,rgb(15_13_10/0)_70%,rgb(15_13_10/0.35))] xl:block"
       />
+      {/* Legibility for the headline */}
+      <div aria-hidden="true" className="overlay-scrim" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[linear-gradient(to_top,rgb(15_13_10/0.6),rgb(15_13_10/0.25)_70%,rgb(15_13_10/0))] md:hidden"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 hidden bg-[linear-gradient(to_right,rgb(15_13_10/0.5),rgb(15_13_10/0)_65%)] md:block"
+      />
       <SocialRail />
-      <HeroStats />
+      <HeroIntro />
+      <HeroHighlights />
     </section>
   )
 }

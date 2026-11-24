@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
-import { contact, mainNav } from '../../content/home'
+import { brand } from '../../content/brand'
+import { anchors, contact, mainNav } from '../../content/home'
 import { useScrolledPast } from '../../hooks/useScrollPosition'
 import { Icon } from '../ui/Icon'
 import { Logo } from '../ui/Logo'
@@ -11,11 +12,10 @@ function DesktopNav({ tone, label }: { tone: Tone; label: string }) {
   return (
     <nav aria-label={label}>
       <ul className="flex items-center gap-11">
-        {mainNav.map((item, i) => (
+        {mainNav.map((item) => (
           <li key={item.href}>
             <a
               href={item.href}
-              aria-current={i === 0 ? 'page' : undefined}
               className={`text-sm font-medium transition-colors duration-200 hover:text-accent aria-[current=page]:underline aria-[current=page]:underline-offset-4 ${
                 tone === 'light' ? 'text-white' : 'text-fg'
               }`}
@@ -61,7 +61,7 @@ export function SiteHeader() {
       <header className="absolute inset-x-0 top-0 z-40 hidden xl:block">
         <div className="container-page grid h-[6.5rem] grid-cols-[1fr_auto_1fr] items-center gap-8">
           <DesktopNav tone="light" label="Main" />
-          <a href="#top" aria-label="Products Palace, back to top">
+          <a href={`#${anchors.top}`} aria-label={`${brand.name}, back to top`}>
             <Logo tone="light" className="text-[1.125rem]" />
           </a>
           <HeaderActions tone="light" />
@@ -75,7 +75,7 @@ export function SiteHeader() {
         }`}
       >
         <div className="container-page grid h-header-sticky grid-cols-[1fr_auto_1fr] items-center gap-8">
-          <a href="#top" aria-label="Products Palace, back to top" className="justify-self-start">
+          <a href={`#${anchors.top}`} aria-label={`${brand.name}, back to top`} className="justify-self-start">
             <Logo className="text-[0.9375rem]" />
           </a>
           <DesktopNav tone="dark" label="Main (condensed)" />
@@ -85,7 +85,7 @@ export function SiteHeader() {
 
       <header className="fixed inset-x-0 top-0 z-50 h-header-mobile bg-white xl:hidden">
         <div className="flex h-full items-center justify-between px-4 md:px-6">
-          <a href="#top" aria-label="Products Palace, back to top">
+          <a href={`#${anchors.top}`} aria-label={`${brand.name}, back to top`}>
             <Logo className="text-[0.875rem]" />
           </a>
           <button

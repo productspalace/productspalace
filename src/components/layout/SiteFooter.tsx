@@ -1,13 +1,13 @@
 import { useRef, useState, type CSSProperties, type FormEvent } from 'react'
-import { contact, footer, socials } from '../../content/home'
+import { anchors, contact, footer, socials } from '../../content/home'
 import { gsap, MOTION_OK, useGSAP } from '../../lib/gsap'
 import { Icon } from '../ui/Icon'
 import { Logo } from '../ui/Logo'
 import { Highlight } from '../ui/SectionHeading'
 
-function Newsletter() {
+function RegisterInterest() {
   const [sent, setSent] = useState(false)
-  const { newsletter } = footer
+  const { register } = footer
 
   // No backend yet: the form validates and acknowledges locally.
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -24,31 +24,31 @@ function Newsletter() {
       <div className="relative container-page flex flex-col gap-8 pt-14 pb-24 lg:flex-row lg:items-start lg:justify-between lg:pt-[4.5rem] lg:pb-28">
         <div className="max-w-[31rem]" data-reveal="up" style={{ '--reveal-delay': '400ms' } as CSSProperties}>
           <h2 className="font-display text-[2rem] leading-none font-light tracking-[-0.02em]">
-            {newsletter.title[0]}
-            <Highlight>{newsletter.title[1]}</Highlight>
+            {register.title[0]}
+            <Highlight>{register.title[1]}</Highlight>
           </h2>
-          <p className="mt-4 text-body leading-8 text-ink-800">{newsletter.text}</p>
+          <p className="mt-4 text-body leading-8 text-ink-800">{register.text}</p>
         </div>
 
         {sent ? (
           <p role="status" className="font-display text-h4 lg:mt-3">
-            {newsletter.success}
+            {register.success}
           </p>
         ) : (
           <form onSubmit={onSubmit} className="flex w-full flex-col gap-4 sm:flex-row lg:mt-3 lg:w-auto">
-            <label htmlFor="newsletter-email" className="sr-only">
+            <label htmlFor="register-email" className="sr-only">
               Email address
             </label>
             <input
-              id="newsletter-email"
+              id="register-email"
               type="email"
               required
               autoComplete="email"
-              placeholder={newsletter.placeholder}
+              placeholder={register.placeholder}
               className="h-[3.125rem] w-full border border-line-strong bg-stone-50 px-4 text-fg placeholder:text-fg-muted focus-visible:outline-accent lg:w-[19.375rem]"
             />
             <button type="submit" className="btn btn-ink min-h-[3.125rem] w-full lg:w-[19.375rem]">
-              {newsletter.button}
+              {register.button}
             </button>
           </form>
         )}
@@ -93,9 +93,9 @@ const columnLink = 'text-sm font-medium text-white transition-colors hover:text-
 
 export function SiteFooter() {
   return (
-    <footer id="contact" className="bg-ink-950 text-white">
+    <footer id={anchors.contact} className="bg-ink-950 text-white">
       <div className="text-fg">
-        <Newsletter />
+        <RegisterInterest />
       </div>
 
       <div className="container-page grid gap-12 pt-16 pb-6 md:grid-cols-2 lg:pt-20 xl:grid-cols-[minmax(0,1.45fr)_minmax(0,1.35fr)_minmax(0,0.9fr)_minmax(0,0.95fr)] xl:gap-10">
@@ -115,7 +115,7 @@ export function SiteFooter() {
 
         <nav aria-label="Quick links">
           <p className={columnTitle}>{footer.quickLinks.title}</p>
-          <ul className="mt-10 grid grid-flow-col grid-cols-2 grid-rows-5 gap-x-10 gap-y-6">
+          <ul className="mt-10 grid grid-flow-col grid-cols-2 grid-rows-4 gap-x-10 gap-y-6">
             {footer.quickLinks.links.map((l) => (
               <li key={l.label}>
                 <a className={columnLink} href={l.href}>
@@ -126,10 +126,10 @@ export function SiteFooter() {
           </ul>
         </nav>
 
-        <nav aria-label={footer.subsidiaries.title}>
-          <p className={columnTitle}>{footer.subsidiaries.title}</p>
+        <nav aria-label={footer.promises.title}>
+          <p className={columnTitle}>{footer.promises.title}</p>
           <ul className="mt-9 grid gap-6">
-            {footer.subsidiaries.links.map((l) => (
+            {footer.promises.links.map((l) => (
               <li key={l.label}>
                 <a className={columnLink} href={l.href}>
                   {l.label}
