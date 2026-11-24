@@ -1,4 +1,5 @@
-import { anchors, promise } from '../../content/home'
+import { promise } from '../../content/home'
+import { anchors } from '../../content/site'
 import { useSnapTrack } from '../../hooks/useSnapTrack'
 import { AssetImage } from '../ui/AssetImage'
 import { CarouselNav } from '../ui/CarouselNav'

@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
-import { anchors, firstAddress } from '../../content/home'
+import { firstAddress } from '../../content/home'
+import { anchors } from '../../content/site'
 import { AssetImage } from '../ui/AssetImage'
 import { LogoMark } from '../ui/Logo'
 import { SectionHeading } from '../ui/SectionHeading'

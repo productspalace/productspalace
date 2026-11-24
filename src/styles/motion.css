@@ -19,10 +19,32 @@
     animation-name: fade-in-right;
   }
 
+  /* Image frames: the frame unmasks upwards while the image inside settles from
+     a slight zoom. Put on an overflow-hidden wrapper whose first child is the image. */
+  .motion-ready [data-reveal="mask"]:not(.is-revealed) {
+    opacity: 1;
+    clip-path: inset(100% 0 0 0);
+  }
+
+  .motion-ready [data-reveal="mask"].is-revealed {
+    animation: var(--animate-mask-reveal);
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  .motion-ready [data-reveal="mask"].is-revealed > :first-child {
+    animation: var(--animate-mask-zoom);
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .motion-ready [data-reveal]:not(.is-revealed),
     .motion-ready [data-reveal].is-revealed {
       opacity: 1;
+      clip-path: none;
+      animation: none;
+    }
+
+    .motion-ready [data-reveal="mask"].is-revealed > :first-child {
       animation: none;
     }
   }

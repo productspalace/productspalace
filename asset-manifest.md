@@ -1,6 +1,6 @@
-# Homepage asset manifest
+# Asset manifest
 
-Every homepage image, film and logo is referenced from **`src/content/assets.ts`**. To replace an
+Every image, film and logo on the site (homepage and About page) is referenced from **`src/content/assets.ts`**. To replace an
 asset, drop the final file into `public/assets/…` and change the `src` (and `width`/`height`, and
 `position` if the crop needs it) of that entry. No component or layout changes are needed as long
 as the aspect ratio below is respected (every slot uses `object-fit: cover` unless noted).
@@ -72,3 +72,24 @@ Lifestyle photography of Nigerian households suits this section far better than 
 **Accuracy:** the brand story plans no swimming pool. Several placeholders (the hero slides and
 two of the about mosaic tiles) show pools. Replace them before launch so the imagery does not
 promise an amenity that is not planned.
+
+## About page
+
+All About imagery is **TEMP**: existing pool-free placeholders re-used in the slot whose moment
+they suit best (new stock could not be downloaded in this build). No image shows the Products
+Palace development. Final photography should show people and everyday life, ideally Nigerian
+households, more than architecture. Every frame uses `object-fit: cover`.
+
+| ID | Section | Temporary asset | Intended emotional message | Required final asset | Recommended size | Ratio (frame) | Positioning | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `about-hero` | Hero banner (darkened ≈ 50 %, text on the left) | `expertise/film-poster.jpg` | Home as the place that gives something back: calm, warm, unhurried | A lived-in living room in warm evening light, or someone arriving home and setting their bag down; quiet left third for the headline | 2400 × 1350 | ≈ 2.2 : 1 desktop (1440 × 666), ≈ 0.95 : 1 phone | `center 60%`; keep the subject in the right two-thirds | TEMP (also used on the homepage) |
+| `about-story` | Our story, image 718 × 700 | `hero/hero-01.jpg` | The day letting go: a home with the lights already on | A home at dusk, lights on inside, or the moment at the front door | 1500 × 1460 | ≈ 1 : 1 desktop; ≈ 0.6 : 1 tablet (bleeds right); ≈ 1 : 1 phone (full-bleed 400 px) | `40% center` | TEMP (also the first homepage hero slide) |
+| `about-belief` | Our belief, image 718 × 600 | `about/lifestyle-02.jpg` | Luxury as the freedom to rest | A calm bedroom or a quiet reading corner in soft light | 1440 × 1200 | 1.2 : 1 (≈ 1.05 : 1 tablet, ≈ 1 : 1 phone) | centre | TEMP (also a homepage promise card) |
+| `about-people-building` | The lives: the one who is building | `process/step-02.jpg` | Focus and calm: a private workshop for ambition | A professional at a desk by a window at home, early morning | 1100 × 880 | 1.25 : 1 desktop sticky frame (502 × 400); ≈ 1.2–2 : 1 inline below 1200 px | `center 30%` | TEMP (also on the homepage) |
+| `about-people-newlyweds` | The lives: the newlyweds | `about/lifestyle-03.jpg` | Evenings that belong to the two of them | A couple cooking together on a Friday night | 1100 × 880 | as above | centre | TEMP (shows only a kitchen, no people) |
+| `about-people-family` | The lives: the growing family | `process/step-04.jpg` | Safe play, childhood memories close to home | A child on a bicycle in a safe shared space, parents nearby | 1100 × 880 | as above | centre | TEMP (shows a suburban house) |
+| `about-people-arrived` | The lives: the family that has arrived | `projects/project-05.jpg` | Gathering generations; the reward of years of work | Three generations around a table at home | 1100 × 880 | as above | centre | TEMP (shows architecture only) |
+| `about-first-address` | Our first address, image 718 × 600 | `news/news-03.jpg` | A real place being planned, set among green space | Official render of the planned maisonettes (only once approved); until then an abstract or clearly illustrative image | 1440 × 1200 | 1.2 : 1 (≈ 1.1 : 1 phone) | centre; keep the top-left (chip) and bottom strip (caption) calm | TEMP (shows an apartment block, not maisonettes; carries an "illustrative" caption) |
+
+The households' images double as the sticky desktop frame, so they need to work at 1.25 : 1 and
+when cropped wider on tablets. Replace them by editing `aboutPeopleImages` in `src/content/assets.ts`.

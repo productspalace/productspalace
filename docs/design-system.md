@@ -22,6 +22,21 @@ homepage component lives.
 
 `--ease-luxe` already matched the reference's loader/menu easing exactly and is reused.
 
+## Additions made for the About page
+
+No new colours, fonts or spacing tokens: the About page is built from the homepage system.
+
+| Addition | Where | Use |
+| --- | --- | --- |
+| `--animate-mask-reveal`, `--animate-mask-zoom` (+ keyframes) | `theme.css` | Image entrance: the frame unmasks upwards (`clip-path`) while the image settles from `scale(1.12)`. The zoom uses `backwards` fill so hover transforms still work afterwards |
+| `data-reveal="mask"` | `motion.css` | Put on an `overflow-hidden` image frame whose first child is the image. Off for reduced motion |
+| `revealDelay(ms)` | `src/lib/reveal.ts` | Inline `--reveal-delay` style for `data-reveal` elements |
+| `SocialRail` | `src/components/ui/SocialRail.tsx` | Extracted from the homepage hero; positioned per page with `className` |
+
+**Reveal gotcha:** `useRevealOnScroll` adds `is-revealed` to the element directly. Never put
+`data-reveal` on an element whose `className` React changes after mount (React would drop
+`is-revealed`). Wrap it instead (see the numerals in `OurPeople.tsx`).
+
 ### Primitives (`src/styles/utilities.css`)
 
 | Utility | Use |
@@ -64,8 +79,20 @@ homepage component lives.
 | `TestimonialsSection` | `src/components/home/TestimonialsSection.tsx` | The moment we build for: story-beat track |
 | `NewsSection` | `src/components/home/NewsSection.tsx` | Our first address: planned-feature cards |
 | `HomePage` | `src/pages/HomePage.tsx` | Section order |
+| `SocialRail` | `src/components/ui/SocialRail.tsx` | "Follow us" rail on hero imagery (home and About) |
+| `AboutHero` | `src/components/about/AboutHero.tsx` | Darkened banner photo, kicker, display H1, paragraph, social rail |
+| `OurStory` | `src/components/about/OurStory.tsx` | Intro split: image 718 × 700 left / text right; bleeding image on tablets |
+| `OurBelief` | `src/components/about/OurBelief.tsx` | Second split: inset text left / image 718 × 600 right |
+| `OurPurpose` | `src/components/about/OurPurpose.tsx` | Two white statement cards with 3 px brass base rule (grey band) |
+| `OurPeople` | `src/components/about/OurPeople.tsx` | Four households: sticky cross-fading image (desktop), numerals, per-household images below 1200 px |
+| `OurPromise` | `src/components/about/OurPromise.tsx` | Five principle cards with brass initials, 3 + 2 centred |
+| `FirstAddress` | `src/components/about/FirstAddress.tsx` | Planned pilot: split with "Planned" chip and illustrative caption, six feature → purpose items |
+| `AboutCTA` | `src/components/about/AboutCTA.tsx` | Closing quote block and register CTA |
+| `AboutPage` | `src/pages/AboutPage.tsx` | About section order (grey band wraps purpose + people) |
 
-Content and copy: `src/content/home.ts` (homepage) and `src/content/brand.ts` (reused brand messages);
-see `docs/homepage-content.md` and `docs/brand-voice.md`. Assets: `src/content/assets.ts` (see `/asset-manifest.md`).
+Content and copy: `src/content/site.ts` (navigation, contact, footer), `src/content/home.ts`
+(homepage), `src/content/about.ts` (About page) and `src/content/brand.ts` (reused brand messages);
+see `docs/homepage-content.md`, `docs/about-page-content.md` and `docs/brand-voice.md`.
+Assets: `src/content/assets.ts` (see `/asset-manifest.md`). Pages and routing: `docs/architecture.md`.
 Component file names follow the reference layout; the table says what each now renders.
-Reference audit: `docs/homepage-reference-audit.md`.
+Reference audits: `docs/homepage-reference-audit.md`, `docs/about-reference-audit.md`.

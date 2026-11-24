@@ -1,9 +1,11 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { heroFilm, heroSlides } from '../../content/assets'
-import { anchors, hero, socials } from '../../content/home'
+import { hero } from '../../content/home'
+import { anchors } from '../../content/site'
 import { prefersReducedMotion } from '../../lib/gsap'
 import { AssetImage } from '../ui/AssetImage'
 import { Icon } from '../ui/Icon'
+import { SocialRail } from '../ui/SocialRail'
 
 const SLIDE_DELAY = 4000
 const SLIDE_FADE = 1000
@@ -64,28 +66,6 @@ function HeroFilm() {
       playsInline
       aria-hidden="true"
     />
-  )
-}
-
-function SocialRail() {
-  return (
-    <div
-      data-reveal="right"
-      style={{ '--reveal-delay': '300ms' } as CSSProperties}
-      className="absolute top-[27%] right-6 z-10 hidden flex-col items-center gap-6 text-white md:flex xl:right-11"
-    >
-      <span className="text-[0.8125rem] font-medium [writing-mode:vertical-rl] rotate-180">{hero.followLabel}</span>
-      <span className="h-12 w-px bg-white/40" />
-      <ul className="flex flex-col items-center gap-3.5 [--icon-cutout:#111]">
-        {socials.map((s) => (
-          <li key={s.id}>
-            <a href={s.href} aria-label={s.label} className="transition-colors hover:text-accent">
-              <Icon name={s.id} size={17} />
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
   )
 }
 
@@ -183,7 +163,7 @@ export function Hero() {
         aria-hidden="true"
         className="absolute inset-0 hidden bg-[linear-gradient(to_right,rgb(15_13_10/0.5),rgb(15_13_10/0)_65%)] md:block"
       />
-      <SocialRail />
+      <SocialRail className="top-[27%] right-6 xl:right-11" />
       <HeroIntro />
       <HeroHighlights />
     </section>

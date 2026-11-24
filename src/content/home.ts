@@ -1,6 +1,7 @@
 /**
  * Homepage copy and data. Components render whatever is here, so copy can be
- * edited without touching layout.
+ * edited without touching layout. Navigation, contact and footer content are
+ * shared by every page and live in ./site.ts.
  *
  * Source of truth: "Products Palace Brand Story". Voice rules: docs/brand-voice.md.
  * Section-by-section intent: docs/homepage-content.md.
@@ -11,58 +12,10 @@
  */
 import { brand, promises } from './brand'
 import { firstAddressImages, peopleImages, promiseImages, type ImageAsset } from './assets'
+import { anchors, followLabel, onThisPage, registerInterest } from './site'
 
-export type Link = { label: string; href: string }
-
-/** Section anchors, shared by navigation, CTAs and the section elements themselves. */
-export const anchors = {
-  top: 'top',
-  story: 'about',
-  people: 'people',
-  belief: 'belief',
-  promise: 'promise',
-  moment: 'moment',
-  firstAddress: 'first-address',
-  contact: 'contact',
-} as const
-
-const to = (id: string) => `#${id}`
-
-/** One call to action, used wherever the visitor is invited to act. Leads to the form in the footer. */
-const registerInterest: Link = { label: 'Register your interest', href: to(anchors.contact) }
-
-export const mainNav: Link[] = [
-  { label: 'Our story', href: to(anchors.story) },
-  { label: 'Who we build for', href: to(anchors.people) },
-  { label: 'Our promise', href: to(anchors.promise) },
-  { label: 'The homes', href: to(anchors.firstAddress) },
-]
-
-export type SocialId = 'facebook' | 'x' | 'youtube' | 'instagram' | 'linkedin' | 'whatsapp'
-export type SocialLink = { id: SocialId; label: string; href: string }
-
-// PLACEHOLDER: replace '#' with the real profile URLs, and remove any channel the brand does not use.
-export const socials: SocialLink[] = [
-  { id: 'facebook', label: 'Facebook', href: '#' },
-  { id: 'x', label: 'X', href: '#' },
-  { id: 'youtube', label: 'YouTube', href: '#' },
-  { id: 'instagram', label: 'Instagram', href: '#' },
-  { id: 'linkedin', label: 'LinkedIn', href: '#' },
-]
-
-export const contact = {
-  cta: { label: 'Register interest', href: to(anchors.contact) },
-  // PLACEHOLDER: WhatsApp link (https://wa.me/<number>).
-  whatsapp: { label: 'Chat with us on WhatsApp', href: to(anchors.contact) },
-  // PLACEHOLDER: office address. The brand story places Products Palace in Lagos; nothing more specific is confirmed.
-  addresses: ['Lagos, Nigeria'],
-  // PLACEHOLDER: confirm the mailbox exists.
-  email: 'hello@productspalace.com',
-  // PLACEHOLDER: real phone number.
-  phone: '+234 000 000 0000',
-  // PLACEHOLDER: confirm office hours.
-  hours: { label: 'Office hours:', value: 'Mon – Fri, 9am – 5pm' },
-}
+// Homepage links point at homepage sections, so they stay relative.
+const to = onThisPage
 
 /* -------------------------------------------------------------------------- */
 /* 1. Hero: recognition                                                        */
@@ -84,7 +37,7 @@ export const hero = {
       { value: 'One gate', label: 'A managed community' },
     ],
   },
-  followLabel: 'Follow us',
+  followLabel,
 }
 
 /* -------------------------------------------------------------------------- */
@@ -257,40 +210,4 @@ export const firstAddress = {
       image: firstAddressImages[2],
     },
   ],
-}
-
-/* -------------------------------------------------------------------------- */
-/* Footer: action                                                              */
-/* -------------------------------------------------------------------------- */
-
-export const footer = {
-  register: {
-    title: ['Register Your ', 'Interest'] as const,
-    text: 'Be among the first to hear as the details of our first address are shared. Only what matters, and only when there is something worth saying.',
-    placeholder: 'Your email address',
-    button: 'Register interest',
-    success: 'Thank you. We’ll be in touch as the details are shared.',
-  },
-  blurb: brand.closing,
-  quickLinks: {
-    title: 'Explore',
-    links: [
-      { label: 'Home', href: to(anchors.top) },
-      { label: 'Our story', href: to(anchors.story) },
-      { label: 'Who we build for', href: to(anchors.people) },
-      { label: 'What we believe', href: to(anchors.belief) },
-      { label: 'Our promise', href: to(anchors.promise) },
-      { label: 'The homes', href: to(anchors.firstAddress) },
-      { label: 'Register interest', href: to(anchors.contact) },
-      // PLACEHOLDER: link to the privacy policy once it exists.
-      { label: 'Privacy policy', href: to(anchors.top) },
-    ] satisfies Link[],
-  },
-  promises: {
-    title: 'What you can count on',
-    links: promises.map((p) => ({ label: p.title, href: to(anchors.promise) })) satisfies Link[],
-  },
-  contactTitle: 'Let’s talk about home',
-  marquee: brand.tagline,
-  copyright: `Copyright © ${brand.name} ${new Date().getFullYear()}`,
 }

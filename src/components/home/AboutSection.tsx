@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react'
 import { aboutGallery } from '../../content/assets'
-import { about, anchors } from '../../content/home'
+import { about } from '../../content/home'
+import { anchors } from '../../content/site'
 import { AssetImage } from '../ui/AssetImage'
 import { Highlight, SectionHeading } from '../ui/SectionHeading'
 
