@@ -159,6 +159,9 @@
   --animate-gold-pulse: gold-pulse 2s ease-in-out infinite;
   --animate-spin-slow: loader-spin 25s linear infinite;
 
+  /* ---------- Footer additions (see docs/footer-reference-audit.md) ---------- */
+  --ease-pill: cubic-bezier(0.35, 0.755, 0.42, 0.95); /* btn-pill fill and colour */
+
   /* ---------- About page additions (see docs/design-system.md) ---------- */
   --animate-mask-reveal: mask-reveal 1.2s var(--ease-reveal) both;
   --animate-mask-zoom: mask-zoom 1.6s var(--ease-reveal) backwards;

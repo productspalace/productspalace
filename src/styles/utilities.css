@@ -520,16 +520,67 @@
   }
 }
 
-/* Outlined display type (footer marquee). */
-@utility text-outline {
-  color: transparent;
-  -webkit-text-stroke: 1px var(--outline-color, var(--color-brass-600));
-}
-
 @utility scrollbar-none {
   scrollbar-width: none;
 
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+/* ==========================================================================
+   Footer primitives (Sujimoto-referenced footer, see docs/footer-reference-audit.md)
+   ========================================================================== */
+
+/* Rounded outline button. On hover a circle of the outline colour grows from the
+   centre until it fills the pill (reference: 0.3 s, scale 0 -> 1.2). Colours:
+   --pill-color (outline, text, fill) and --pill-hover-fg (text on the fill). */
+@utility btn-pill {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.375rem;
+  padding-inline: 1.75rem;
+  border: 1px solid var(--pill-color, var(--color-white));
+  border-radius: 9999px;
+  background-color: transparent;
+  color: var(--pill-color, var(--color-white));
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 300ms var(--ease-pill);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 9999px;
+    background-color: var(--pill-color, var(--color-white));
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    transition:
+      transform 300ms var(--ease-pill),
+      opacity 300ms var(--ease-pill);
+  }
+
+  &:hover {
+    color: var(--pill-hover-fg, var(--color-ink-900));
+  }
+
+  &:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
   }
 }

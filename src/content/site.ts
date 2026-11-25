@@ -1,12 +1,10 @@
 /**
  * Site-wide structure and content shared by every page: routes, section anchors,
- * navigation, social links, contact details and the footer.
+ * navigation, social links and contact details. Footer copy: ./footer.ts.
  *
  * Values marked PLACEHOLDER must be confirmed by the business before launch.
  * Architecture (pages, links, routing): docs/architecture.md.
  */
-import { brand, promises } from './brand'
-
 export type Link = { label: string; href: string }
 
 /** Every page of the site. Each one is its own HTML document (see vite.config.ts). */
@@ -28,7 +26,7 @@ export const anchors = {
   promise: 'promise',
   moment: 'moment',
   firstAddress: 'first-address',
-  /** The footer (register interest + contact). Present on every page. */
+  /** The register-interest panel at the top of the footer. Present on every page. */
   contact: 'contact',
 } as const
 
@@ -38,7 +36,7 @@ export const homeSection = (id: string) => `${routes.home}#${id}`
 /** A section on the current page. */
 export const onThisPage = (id: string) => `#${id}`
 
-/** The one action the site converges on. Leads to the form in the footer of whichever page you are on. */
+/** The one action the site converges on. Leads to the register form in the footer of whichever page you are on. */
 export const registerInterest: Link = { label: 'Register your interest', href: onThisPage(anchors.contact) }
 
 export type NavLink = Link & {
@@ -70,48 +68,15 @@ export const socials: SocialLink[] = [
 
 export const followLabel = 'Follow us'
 
+/** Contact details. Unconfirmed values are `null` and are not rendered (see ./footer.ts). */
 export const contact = {
   cta: { label: 'Register interest', href: onThisPage(anchors.contact) },
   // PLACEHOLDER: WhatsApp link (https://wa.me/<number>).
   whatsapp: { label: 'Chat with us on WhatsApp', href: onThisPage(anchors.contact) },
-  // PLACEHOLDER: office address. The brand story places Products Palace in Lagos; nothing more specific is confirmed.
+  // PENDING: full office address. The brand story places Products Palace in Lagos; nothing more specific is confirmed.
   addresses: ['Lagos, Nigeria'],
-  // PLACEHOLDER: confirm the mailbox exists.
-  email: 'hello@productspalace.com',
-  // PLACEHOLDER: real phone number.
-  phone: '+234 000 000 0000',
-  // PLACEHOLDER: confirm office hours.
-  hours: { label: 'Office hours:', value: 'Mon – Fri, 9am – 5pm' },
-}
-
-export const footer = {
-  register: {
-    title: ['Register Your ', 'Interest'] as const,
-    text: 'Be among the first to hear as the details of our first address are shared. Only what matters, and only when there is something worth saying.',
-    placeholder: 'Your email address',
-    button: 'Register interest',
-    success: 'Thank you. We’ll be in touch as the details are shared.',
-  },
-  blurb: brand.closing,
-  quickLinks: {
-    title: 'Explore',
-    links: [
-      { label: 'Home', href: routes.home },
-      { label: 'About us', href: routes.about },
-      { label: 'Who we build for', href: homeSection(anchors.people) },
-      { label: 'What we believe', href: homeSection(anchors.belief) },
-      { label: 'Our promise', href: homeSection(anchors.promise) },
-      { label: 'The homes', href: homeSection(anchors.firstAddress) },
-      { label: 'Register interest', href: onThisPage(anchors.contact) },
-      // PLACEHOLDER: link to the privacy policy once it exists.
-      { label: 'Privacy policy', href: onThisPage(anchors.top) },
-    ] satisfies Link[],
-  },
-  promises: {
-    title: 'What you can count on',
-    links: promises.map((p) => ({ label: p.title, href: homeSection(anchors.promise) })) satisfies Link[],
-  },
-  contactTitle: 'Let’s talk about home',
-  marquee: brand.tagline,
-  copyright: `Copyright © ${brand.name} ${new Date().getFullYear()}`,
+  // PENDING: set once the mailbox is confirmed (proposed: hello@productspalace.com).
+  email: null as string | null,
+  // PENDING: set once the number is confirmed, written as it should be displayed (e.g. '+234 …').
+  phone: null as string | null,
 }

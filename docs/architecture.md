@@ -72,7 +72,8 @@ src/
     home/                        homepage sections
     about/                       About sections
   content/
-    site.ts                      routes, anchors, navigation, socials, contact, footer
+    site.ts                      routes, anchors, navigation, socials, contact
+    footer.ts                    footer copy and link groups (renders only confirmed contact details)
     brand.ts                     reused brand messages (tagline, promises)
     home.ts, about.ts            page copy
     assets.ts                    every image / film reference

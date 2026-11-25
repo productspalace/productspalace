@@ -45,7 +45,6 @@ No new colours, fonts or spacing tokens: the About page is built from the homepa
 | `btn-ink` | Dark button, accent hairline; hover fill turns accent and wipes away |
 | `btn-round` | 44 px round carousel arrow |
 | `link-arrow` | Uppercase link with thick accent underline and nudging arrow |
-| `text-outline` | Outlined display type (`--outline-color` to override) |
 | `scrollbar-none` | Hides scrollbars on snap tracks |
 
 ### Motion (`src/styles/motion.css`, `src/lib/`)
@@ -56,6 +55,16 @@ No new colours, fonts or spacing tokens: the About page is built from the homepa
   is wrapped in `gsap.matchMedia('(prefers-reduced-motion: no-preference)')`.
 - Lenis (`src/lib/smooth-scroll.ts`) smooths wheel scrolling, drives ScrollTrigger and exposes
   `scrollToTarget` / `setScrollLocked`. Disabled for reduced motion.
+
+## Additions made for the footer
+
+The footer follows a different reference (Sujimoto Group); details in `docs/footer-reference-audit.md`.
+
+| Addition | Where | Use |
+| --- | --- | --- |
+| `--ease-pill` | `theme.css` | `cubic-bezier(.35,.755,.42,.95)`, pill button transitions |
+| `btn-pill` | `utilities.css` | Rounded outline button; a circle of `--pill-color` grows from the centre on hover, text turns `--pill-hover-fg`. Footer only: buttons elsewhere stay square |
+| `text-outline` (removed) | `utilities.css` | Was only used by the old footer marquee |
 
 ## UI registry
 
@@ -69,7 +78,7 @@ No new colours, fonts or spacing tokens: the About page is built from the homepa
 | `useSnapTrack` | `src/hooks/useSnapTrack.ts` | Native scroll-snap track state |
 | `Loader` | `src/components/layout/Loader.tsx` + `index.html` | Markup in HTML, exit timing in React |
 | `SiteHeader`, `MobileMenu` | `src/components/layout/` | Transparent / sticky / mobile variants |
-| `SiteFooter` | `src/components/layout/SiteFooter.tsx` | Newsletter, columns, marquee, bottom bar |
+| `SiteFooter` | `src/components/layout/SiteFooter.tsx` | Sujimoto-referenced: follow / register band, four columns, copyright bar (see `docs/footer-reference-audit.md`) |
 | `ScrollTopButton`, `CustomCursor` | `src/components/layout/` | Floating utilities |
 | `Hero` | `src/components/home/Hero.tsx` | Film or slideshow, headline block, social rail, first-address highlights bar |
 | `AboutSection` | `src/components/home/AboutSection.tsx` | Our story; includes the lifestyle mosaic |
@@ -90,9 +99,9 @@ No new colours, fonts or spacing tokens: the About page is built from the homepa
 | `AboutCTA` | `src/components/about/AboutCTA.tsx` | Closing quote block and register CTA |
 | `AboutPage` | `src/pages/AboutPage.tsx` | About section order (grey band wraps purpose + people) |
 
-Content and copy: `src/content/site.ts` (navigation, contact, footer), `src/content/home.ts`
+Content and copy: `src/content/site.ts` (navigation, contact), `src/content/footer.ts` (footer), `src/content/home.ts`
 (homepage), `src/content/about.ts` (About page) and `src/content/brand.ts` (reused brand messages);
 see `docs/homepage-content.md`, `docs/about-page-content.md` and `docs/brand-voice.md`.
 Assets: `src/content/assets.ts` (see `/asset-manifest.md`). Pages and routing: `docs/architecture.md`.
 Component file names follow the reference layout; the table says what each now renders.
-Reference audits: `docs/homepage-reference-audit.md`, `docs/about-reference-audit.md`.
+Reference audits: `docs/homepage-reference-audit.md`, `docs/about-reference-audit.md`, `docs/footer-reference-audit.md`.
