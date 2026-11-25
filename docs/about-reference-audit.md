@@ -33,7 +33,7 @@ header, loader, footer and floating utilities. The About page reuses all of them
 | 4a | Grey band: statement cards | 2 298 / 429 | Page background `#f5f5f5`. Two white cards 491.5 × 269 centred with a 4 px gap, padding 48 / 40, square corners, no shadow, 3 px gold bottom border (two different golds). H3 40 px serif 300 centred; text 20 px / 32.4 px centred, max 412 px | Observed |
 | 4b | Grey band: values | 2 727 / 490 | Image 502 × 400 left (x = 70). H3 40 px at x = 602, then three entries led by a single 56 px gold serif letter (x = 617) with 16 px text beside it (x = 679, 676 px wide) and a bold lead phrase | Observed |
 | 5 | Closing quote ("commitment") | 3 217 / 502 | White. Large pale quote glyph top-left. H2 57.6 px centred with a gold phrase. Italic 19.2 px / 28.8 px quote, 1 100 px wide, centred. Name 16 px uppercase, 4.8 px tracking, gold; role 15 px muted | Observed |
-| 6 | Footer | | Identical to the homepage (newsletter band, columns, outlined marquee) | Observed |
+| 6 | Footer | | Identical to the homepage (newsletter band, columns, outlined marquee) | Observed. Since replaced site-wide by the Sujimoto-referenced footer (`docs/footer-reference-audit.md`) |
 
 At 1920 px the same layout centres on the 1300 px container; H2s cap at 64 px, the H1 stays 80 px.
 

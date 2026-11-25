@@ -154,14 +154,19 @@ The "Price from" and "Property type" fields were removed; no prices exist.
 
 ## 8. Footer: action
 
-- **Register band:** Register Your **Interest**. "Be among the first to hear as the details of our
-  first address are shared. Only what matters, and only when there is something worth saying."
-  Field "Your email address", button "Register interest", confirmation "Thank you. We’ll be in
-  touch as the details are shared."
-- **Brand line:** A home that gives you back to yourself, and to the people you love.
-- **Columns:** Explore (Home, About us, homepage sections, register interest, privacy policy) · What you can count on (the five
-  promises) · Let’s talk about home (contact)
-- **Marquee:** Luxury, for a purpose.
+Shared by every page; content in `src/content/footer.ts`, layout reference in
+`docs/footer-reference-audit.md`.
+
+- **Follow panel:** Follow us + social icons once profile URLs are confirmed. Until then:
+  Our first address, button "Find your place" (→ first address).
+- **Register panel (`#contact`):** Let’s talk about home. Field "Your email address", button
+  "Register interest", note "Be among the first to hear as the details of our first address are
+  shared. Only what matters, and only when there is something worth saying.", confirmation
+  "Thank you. We’ll be in touch as the details are shared."
+- **Columns:** logo + *Luxury, for a purpose.* · Useful links (Home, About us, Our promise) ·
+  Office (Lagos, Nigeria; email and phone once confirmed) · Your next chapter: "You’ve worked hard
+  for this life. Picture a home that gives you room to live it." button "Who we build for"
+- **Copyright:** Copyright © Products Palace 2026
 
 ---
 
@@ -169,14 +174,14 @@ The "Price from" and "Property type" fields were removed; no prices exist.
 
 | Item | Where | Status |
 | --- | --- | --- |
-| Register-interest form has no backend; it only shows a confirmation locally | `SiteFooter.tsx` | Needs a submission endpoint (CRM, email service) before launch |
+| Register-interest form has no backend; it only shows a confirmation locally | `SiteFooter.tsx` (`RegisterPanel`) | Needs a submission endpoint (CRM, email service) before launch |
 | Office address (only "Lagos, Nigeria" is shown) | `contact.addresses` | PLACEHOLDER |
-| Phone number (`+234 000 000 0000`) | `contact.phone` | PLACEHOLDER |
-| Email address (`hello@productspalace.com`) | `contact.email` | Confirm the mailbox exists |
-| Office hours (Mon – Fri, 9am – 5pm) | `contact.hours` | PLACEHOLDER |
+| Phone number | `contact.phone` (`null`, not shown) | PENDING |
+| Email address (proposed `hello@productspalace.com`) | `contact.email` (`null`, not shown) | Confirm the mailbox exists |
+| Office hours | Removed from the footer | Add to `contact` if wanted once confirmed |
 | WhatsApp link | `contact.whatsapp` | PLACEHOLDER |
-| Social profile URLs and which networks are used | `socials` | PLACEHOLDER |
-| Privacy policy page | `footer.quickLinks` | Page does not exist yet |
+| Social profile URLs and which networks are used | `socials` | PLACEHOLDER (hidden in the footer until confirmed; the header and hero rails still show `#` links) |
+| Privacy policy page | `footer.links` in `footer.ts` | Page does not exist yet; not linked |
 | Whether the first development is in Lagos | Not stated on the site; the brand story implies Lagos but does not say so | Confirm before naming a location |
 | Location and commute claims ("locations chosen with the commute in mind") | Promise 4 | From the brand story; confirm for the specific site |
 | "Managed community" and the guard in the 7:15 pm scene | Hero bar, promises, moment | From the brand story; confirm how security will be run |

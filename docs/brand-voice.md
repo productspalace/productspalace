@@ -2,8 +2,8 @@
 
 How Products Palace sounds, and the rules for writing anything the website says.
 Source of truth: **Products Palace Brand Story** (Lagos, 2026). When this guide and the brand story
-disagree, the brand story wins. Reused copy lives in `src/content/brand.ts`, navigation and footer
-copy in `src/content/site.ts`, homepage copy in `src/content/home.ts` and About page copy in
+disagree, the brand story wins. Reused copy lives in `src/content/brand.ts`, navigation copy in
+`src/content/site.ts`, footer copy in `src/content/footer.ts`, homepage copy in `src/content/home.ts` and About page copy in
 `src/content/about.ts`.
 
 ## 1. Purpose
