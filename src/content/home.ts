@@ -132,7 +132,8 @@ export const people = {
 /* -------------------------------------------------------------------------- */
 
 export const belief = {
-  title: 'Luxury, Redefined.',
+  /** Set as two staggered lines inside the statement image (one heading, same words). */
+  title: ['Luxury,', 'Redefined.'] as const,
   subtitle: 'Not the destination. The firm ground you stand on while you build what truly matters.',
   pillars: [
     { title: 'Security', text: 'The kind that lets a mother sleep through the night.' },

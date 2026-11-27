@@ -166,6 +166,19 @@
   --animate-mask-reveal: mask-reveal 1.2s var(--ease-reveal) both;
   --animate-mask-zoom: mask-zoom 1.6s var(--ease-reveal) backwards;
 
+  /* ---------- Selective refinement additions (see docs/selective-ui-refinement.md) ---------- */
+  /* Household tab rule; the duration is set inline to the autoplay interval. */
+  --animate-progress-fill: progress-fill 6s linear both;
+
+  @keyframes progress-fill {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
   @keyframes mask-reveal {
     from {
       clip-path: inset(100% 0 0 0);

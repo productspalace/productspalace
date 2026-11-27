@@ -121,6 +121,12 @@ being read (or hovered). Below 1200 px each household shows its own image.
 | Time | More evenings, less traffic. | Locations chosen with the commute in mind, because every hour saved on the road is an hour returned to the people you love. |
 | Lasting quality | Built to be lived in. | Homes built with care and integrity, intended to serve you well for years after the keys are handed over. |
 
+**Layout (Nov 2026 refinement, `docs/selective-ui-refinement.md` §5.1):** the page's one dark band.
+One photograph drifts under a deep ink tint; kicker, title and intro are centred; the five
+principles sit in five columns from 1200 px (3 + 2 from 1024, 2 per row from 768, a left-aligned
+list on phones), each with its brass initial in a hairline circle. A brass hairline is drawn down
+from the band into "Our first address". Copy unchanged.
+
 ## 7. Our first address: trust
 
 - **Purpose:** present the pilot as the planned, physical expression of the philosophy, and be

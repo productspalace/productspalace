@@ -89,17 +89,30 @@ renders is defined by its content object.
 
 The "Price from" and "Property type" fields were removed; no prices exist.
 
+- **Interaction note (Nov 2026 refinement, `docs/selective-ui-refinement.md` §4.1):** from 768 px the
+  pagination names every household (the `person` values above), and the active tab's brass rule
+  fills over the 6 s autoplay interval; it shows full and still while autoplay is paused. Phones
+  keep the dash pagination. The image stack drifts inside its frame on scroll.
+
 ## 4. Luxury, redefined: belief
 
 - **Purpose:** state the philosophy that sets the brand apart from status-led luxury.
 - **Brand principle:** luxury is the foundation, not the destination; exclusivity has a reason.
-- **Title:** Luxury, Redefined.
-- **Subtitle:** Not the destination. The firm ground you stand on while you build what truly matters.
+- **Title:** Luxury, Redefined. (set as two staggered lines, "Luxury," / "Redefined.", inside the
+  statement image; one H2)
+- **Subtitle:** Not the destination. The firm ground you stand on while you build what truly
+  matters. (beside the second line from 1200 px, below it on smaller screens)
+- **Layout note (Nov 2026 refinement, `docs/selective-ui-refinement.md` §4.2):** the heading, the
+  subtitle and the old film panel are now one image-led statement band (the clip-open motion is
+  kept; the photograph drifts inside it), followed by the pillars and the exclusivity statement.
+  The pillars were not changed: the proposed Peace / Privacy / Time / Room to grow set was not
+  approved.
 - **Pillars:** Security: The kind that lets a mother sleep through the night. · Stillness: Room
   to finish the brief at home without fighting for silence. · Time: Minutes won back from traffic
   and spent at the dinner table instead. · Privacy: A protected community, so home is a place to
   rest, not a stage to perform on.
-- **Film:** "Play the Products Palace brand film" (placeholder until a film exists).
+- **Film:** "Play the Products Palace brand film". The play control and lightbox render only once
+  `expertiseFilm.src` is set; until then the band is a still photograph (no placeholder notice).
 - **Statement** (replaces the reference's member-company logos): *On exclusivity:* We don’t
   close the gate to feel above the world outside it. We close it so parents can choose the
   influences around their children, and home can be a place of rest. Signed: *Exclusive, for a

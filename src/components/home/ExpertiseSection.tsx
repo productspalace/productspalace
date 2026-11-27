@@ -2,21 +2,31 @@ import { useRef, useState } from 'react'
 import { expertiseFilm } from '../../content/assets'
 import { belief } from '../../content/home'
 import { anchors } from '../../content/site'
+import { PARALLAX_LAYER, useParallax } from '../../hooks/useParallax'
 import { gsap, MOTION_OK, useGSAP } from '../../lib/gsap'
+import { revealDelay } from '../../lib/reveal'
 import { AssetImage } from '../ui/AssetImage'
 import { Icon } from '../ui/Icon'
 import { LogoMark } from '../ui/Logo'
-import { SectionHeading } from '../ui/SectionHeading'
 import { VideoLightbox } from './VideoLightbox'
 
 /**
- * Rounded film panel that starts clipped (inset 0 5%, scale .86) and opens to its
- * full frame once it nears 450px from the top of the viewport (scrub 1). The
- * reference measures from a wrapper ~75px above the panel, hence 525px here.
+ * The belief, told inside one image (secondary reference: Sujimoto's "Redefining
+ * Luxury Living" band; see docs/selective-ui-refinement.md §4.2).
+ *
+ * - The rounded panel keeps the primary reference's motion: it starts clipped
+ *   (inset 0 5%, scale .86) and opens to its full frame once it nears 450px from
+ *   the top of the viewport (scrub 1; measured from a wrapper ~75px above, hence 525px).
+ * - Inside it the photograph drifts with the scroll, and the H2 is set as two
+ *   staggered display lines with the subtitle beside the second (below it on
+ *   smaller screens).
+ * - The play control and lightbox appear only once a real film exists
+ *   (`expertiseFilm.src`); until then the band is a still photograph.
  */
-function ClippedFilm() {
+function StatementBand() {
   const wrapRef = useRef<HTMLDivElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
+  const layerRef = useParallax<HTMLDivElement>()
   const [open, setOpen] = useState(false)
 
   useGSAP(
@@ -40,34 +50,59 @@ function ClippedFilm() {
   )
 
   const film = expertiseFilm
+  const [first, second] = belief.title
+
   return (
-    <div ref={wrapRef} className="relative mt-16 h-[25rem] md:h-[31rem] lg:mt-[4.6rem] lg:h-[37.5rem] xl:h-[43.75rem]">
+    <div ref={wrapRef} className="relative h-[27.5rem] md:h-[32.5rem] lg:h-[37.5rem] xl:h-[42.5rem]">
       <div ref={panelRef} className="absolute inset-0 overflow-hidden rounded-card bg-ink-800">
-        {film.src ? (
-          <video
-            className="absolute inset-0 size-full object-cover"
-            src={film.src}
-            poster={film.poster.src}
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-hidden="true"
-          />
-        ) : (
-          <AssetImage asset={film.poster} className="absolute inset-0 size-full object-cover" />
-        )}
+        <div ref={layerRef} className={PARALLAX_LAYER}>
+          {film.src ? (
+            <video
+              className="size-full object-cover"
+              src={film.src}
+              poster={film.poster.src}
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-hidden="true"
+            />
+          ) : (
+            <AssetImage asset={film.poster} className="size-full object-cover" />
+          )}
+        </div>
+        {/* Keeps the statement legible over any photograph */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgb(15_13_10/0.3)_0%,rgb(15_13_10/0.12)_26%,rgb(15_13_10/0.62)_52%,rgb(15_13_10/0.9)_100%)]"
+        />
         <LogoMark className="absolute top-3 left-4 h-14 w-auto text-accent" />
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          aria-label={belief.filmLabel}
-          className="absolute top-1/2 left-1/2 grid size-[6.25rem] -translate-1/2 cursor-pointer place-items-center bg-white/10 text-white backdrop-blur-md transition-colors duration-300 hover:bg-accent hover:text-accent-fg"
-        >
-          <Icon name="play" size={22} />
-        </button>
+        {film.src && (
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label={belief.filmLabel}
+            className="absolute top-4 right-4 grid size-[4.5rem] cursor-pointer place-items-center bg-white/10 text-white backdrop-blur-md transition-colors duration-300 hover:bg-accent hover:text-accent-fg md:top-8 md:right-8 md:size-[6.25rem]"
+          >
+            <Icon name="play" size={22} />
+          </button>
+        )}
+
+        <div className="absolute inset-x-0 bottom-0 flex flex-col gap-5 p-6 md:gap-6 md:p-10 xl:flex-row xl:items-end xl:gap-14 xl:px-16 xl:pb-14">
+          <h2 className="type-display text-white">
+            <span data-reveal="up" className="block">
+              {first}
+            </span>{' '}
+            <span data-reveal="up" style={revealDelay(150)} className="block md:pl-[1.6em]">
+              {second}
+            </span>
+          </h2>
+          <p data-reveal="up" style={revealDelay(300)} className="max-w-[22rem] text-lead font-light text-white/90 xl:mb-3">
+            {belief.subtitle}
+          </p>
+        </div>
       </div>
-      <VideoLightbox film={film} open={open} onClose={() => setOpen(false)} />
+      {film.src && <VideoLightbox film={film} open={open} onClose={() => setOpen(false)} />}
     </div>
   )
 }
@@ -92,17 +127,15 @@ function ExclusivityStatement() {
   )
 }
 
+/** Luxury, redefined: statement band → four pillars → exclusivity statement. */
 export function ExpertiseSection() {
   return (
     <section
       id={anchors.belief}
-      className="bg-[linear-gradient(var(--color-ink-800)_0%,var(--color-ink-950)_15%)] pt-16 pb-24 text-white md:pt-12 lg:pb-32"
+      className="bg-[linear-gradient(var(--color-ink-800)_0%,var(--color-ink-950)_15%)] pt-16 pb-24 text-white md:pt-20 lg:pb-32"
     >
       <div className="container-page">
-        <SectionHeading title={belief.title} effect="split-scale" titleClassName="font-light" />
-        <p className="mt-5 type-h3 font-light">
-          {belief.subtitle}
-        </p>
+        <StatementBand />
 
         <ul className="mt-14 grid gap-x-8 border-t border-white/10 pt-4 md:grid-cols-2 xl:mt-16 xl:grid-cols-4">
           {belief.pillars.map((pillar) => (
@@ -114,7 +147,6 @@ export function ExpertiseSection() {
           ))}
         </ul>
 
-        <ClippedFilm />
         <ExclusivityStatement />
       </div>
     </section>

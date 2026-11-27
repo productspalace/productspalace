@@ -103,6 +103,8 @@ export const aboutImages = {
   hero: img('about-hero', 'expertise/film-poster.jpg', 'A calm, sunlit living room in the late afternoon', 1920, 1080, 'center 60%'),
   story: img('about-story', 'hero/hero-01.jpg', 'A home lit warmly at dusk, with the lights already on inside', 1920, 1080, '40% center'),
   belief: img('about-belief', 'about/lifestyle-02.jpg', 'A calm bedroom made up for a good night’s rest', 720, 600),
+  /** Decorative backdrop of the promise band, under a deep ink tint. */
+  promise: img('about-promise', 'projects/project-03.jpg', 'Neighbouring homes with balconies', 1400, 1220),
   firstAddress: img('about-first-address', 'news/news-03.jpg', 'Low-rise homes with balconies set among trees (illustrative)', 1048, 676),
 }
 
